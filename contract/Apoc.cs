@@ -15,7 +15,7 @@ namespace ApocSample
         #region Token Settings
         static readonly ulong MaxSupply = 10_000_000_000_000_000;
         static readonly ulong InitialSupply = 2_000_000_000_000_000;
-        static readonly byte[] Owner = "NiNmXL8FjEUEs1nfX9uHFBNaenxDHJtmuB".ToScriptHash();
+        static readonly byte[] Owner = "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME".ToScriptHash();
         static readonly ulong TokensPerNEO = 1_000_000_000;
         static readonly ulong TokensPerGAS = 1;
         static readonly byte[] NeoToken = "0xde5f57d430d3dece511cf975a8d37848cb9e0525".HexToBytes();

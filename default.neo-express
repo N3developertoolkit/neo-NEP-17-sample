@@ -1,0 +1,59 @@
+{
+  "magic": 1311256446,
+  "consensus-nodes": [
+    {
+      "tcp-port": 49333,
+      "ws-port": 49334,
+      "rpc-port": 49332,
+      "wallet": {
+        "name": "node1",
+        "accounts": [
+          {
+            "private-key": "289ab8756772f0cf1856c32612249e2e4e3ea524c2ab37c3dc76148639a47935",
+            "script-hash": "NYjzhdekseMYWvYpSoAeypqMiwMuEUDhKB",
+            "label": null,
+            "is-default": true,
+            "contract": {
+              "script": "0c2102a4ac8ba3a19e687afe1ba1abd6d2c919c77ea68021c37817d1791c9f4344e4c50b4195440d78",
+              "parameters": [
+                "Signature"
+              ]
+            }
+          },
+          {
+            "private-key": "289ab8756772f0cf1856c32612249e2e4e3ea524c2ab37c3dc76148639a47935",
+            "script-hash": "NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4",
+            "label": "MultiSigContract",
+            "is-default": false,
+            "contract": {
+              "script": "110c2102a4ac8ba3a19e687afe1ba1abd6d2c919c77ea68021c37817d1791c9f4344e4c5110b41138defaf",
+              "parameters": [
+                "Signature"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "wallets": [
+    {
+      "name": "apoc-owner",
+      "accounts": [
+        {
+          "private-key": "85fbe5d565d2eb87b9881c45b7ade4a00ade081d884370006dd0d026d04513f5",
+          "script-hash": "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME",
+          "label": null,
+          "is-default": true,
+          "contract": {
+            "script": "0c2103f1b82cb5d649e5e665f98438e462be8495e3bdc948f516624ac41b985a053a9c0b4195440d78",
+            "parameters": [
+              "Signature"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "contracts": []
+}

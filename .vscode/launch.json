@@ -18,6 +18,22 @@
                     "check-result": true
                 }
             }
+        },
+        {
+            "name": "deploy (trace)",
+            "type": "neo-contract",
+            "request": "launch",
+            "program": "${workspaceFolder}\\contract\\bin\\Debug\\netstandard2.1\\Apoc.nef",
+            "trace-file": "trace-files/0x656b3d00b02b21ebb0654578d7a162c26077b78751de596c73612ebf96a05da2.neo-trace",
+            "return-types": ["bool"]
+        },
+        {
+            "name": "deploy (trace - fault)",
+            "type": "neo-contract",
+            "request": "launch",
+            "program": "${workspaceFolder}\\contract\\bin\\Debug\\netstandard2.1\\Apoc.nef",
+            "trace-file": "trace-files/0x0beaa7e7be9452f147af344296a6f4518685cf61b0ad61b082b32c74fc226c2b.neo-trace",
+            "return-types": ["bool"]
         }
     ]
 }
