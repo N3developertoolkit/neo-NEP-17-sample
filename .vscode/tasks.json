@@ -9,16 +9,31 @@
             "type": "shell",
             "args": [
                 "build",
-                // Ask dotnet build to generate full paths for file names.
                 "/property:GenerateFullPaths=true",
-                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
-                "/consoleloggerparameters:NoSummary"
+                "/consoleloggerparameters:NoSummary",
+                "${workspaceFolder}/contract/Apoc.csproj"
             ],
             "group": "build",
             "presentation": {
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "neon3",
+            "dependsOn": "build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "neon",
+                "-f",
+                "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.dll"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": []
         }
     ]
 }
