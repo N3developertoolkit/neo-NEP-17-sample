@@ -4,9 +4,9 @@ using Neo.SmartContract.Framework.Services.System;
 using System;
 using System.Numerics;
 
-namespace Template.NEP5.CSharp
+namespace ApocSample
 {
-    public partial class NEP5 : SmartContract
+    public partial class ApocToken : SmartContract
     {
         private static BigInteger GetTransactionAmount(object state)
         {

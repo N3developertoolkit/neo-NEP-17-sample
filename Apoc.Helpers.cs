@@ -1,9 +1,9 @@
 using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services.Neo;
 
-namespace Template.NEP5.CSharp
+namespace ApocSample
 {
-    public partial class NEP5 : SmartContract
+    public partial class ApocToken : SmartContract
     {
         private static bool ValidateAddress(byte[] address) => address.Length == 20 && address.ToBigInteger() != 0;
 

@@ -3,9 +3,9 @@ using Neo.SmartContract.Framework.Services.Neo;
 using Neo.SmartContract.Framework.Services.System;
 using System;
 
-namespace Template.NEP5.CSharp
+namespace ApocSample
 {
-    public partial class NEP5 : SmartContract
+    public partial class ApocToken : SmartContract
     {
         public static bool Deploy()
         {

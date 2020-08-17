@@ -3,14 +3,14 @@ using System;
 using System.ComponentModel;
 using System.Numerics;
 
-namespace Template.NEP5.CSharp
+namespace ApocSample
 {
-    [ManifestExtra("Author", "Neo")]
-    [ManifestExtra("Email", "dev@neo.org")]
+    [ManifestExtra("Author", "Harry Pierson")]
+    [ManifestExtra("Email", "hpierson@ngd.neo.org")]
     [ManifestExtra("Description", "This is a NEP5 example")]
     [SupportedStandards("NEP5", "NEP10")]
     [Features(ContractFeatures.HasStorage | ContractFeatures.Payable)]
-    public partial class NEP5 : SmartContract
+    public partial class ApocToken : SmartContract
     {
         #region Token Settings
         static readonly ulong MaxSupply = 10_000_000_000_000_000;
@@ -30,11 +30,11 @@ namespace Template.NEP5.CSharp
         // When this contract address is included in the transaction signature,
         // this method will be triggered as a VerificationTrigger to verify that the signature is correct.
         // For example, this method needs to be called when withdrawing token from the contract.
-        public static bool Verify() => IsOwner();
+        // public static bool Verify() => IsOwner();
 
-        public static string Name() => "Token Name";
+        public static string Name() => "Apoc Sample Token";
 
-        public static string Symbol() => "TokenSymbol";
+        public static string Symbol() => "APOC";
 
         public static ulong Decimals() => 8;
     }
