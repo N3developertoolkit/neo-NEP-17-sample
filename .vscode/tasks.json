@@ -20,7 +20,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "neon3",
+            "label": "neon",
             "dependsOn": "build",
             "command": "dotnet",
             "type": "shell",
