@@ -44,7 +44,7 @@
             "return-types": ["bool"]
         },
         {
-            "name": "deploy (trace - fault)",
+            "name": "deploy (trace + fault)",
             "type": "neo-contract",
             "request": "launch",
             "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",

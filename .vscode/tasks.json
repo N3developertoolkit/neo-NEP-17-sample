@@ -4,6 +4,20 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "tool restore",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "tool",
+                "restore"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "build",
             "command": "dotnet",
             "type": "shell",
@@ -21,7 +35,7 @@
         },
         {
             "label": "neon",
-            "dependsOn": "build",
+            "dependsOn": ["tool restore", "build"],
             "command": "dotnet",
             "type": "shell",
             "args": [
