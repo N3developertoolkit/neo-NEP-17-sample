@@ -1,0 +1,27 @@
+[
+    // Neo 3 preview 3 does not support NEO transfer in the debugger
+    // {
+    //     "contract": {
+    //         "hash": "0xde5f57d430d3dece511cf975a8d37848cb9e0525"
+    //     },
+    //     "operation": "transfer",
+    //     "args": [
+    //         "@Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME","#0xf3b4dd15d3c1197fa8b5b0bb6ff817608d2bfb37", 10
+    //     ]
+    // },
+    {
+        "contract": {
+            "hash": "0x668e0c1f9d7b70a99dd9e06eadd4c784d641afbc"
+        },
+        "operation": "transfer",
+        "args": [
+            "@Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME","#0xf3b4dd15d3c1197fa8b5b0bb6ff817608d2bfb37", 10
+        ]
+    },
+    {
+        "contract": {
+            "path": "../contract/bin/Debug/netstandard2.1/Apoc.nef"
+        },
+        "operation": "mint"
+    }
+]
