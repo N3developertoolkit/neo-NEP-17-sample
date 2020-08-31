@@ -20,6 +20,25 @@
             }
         },
         {
+            "name": "mint",
+            "type": "neo-contract",
+            "request": "launch",
+            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
+            "invoke-file": "${workspaceFolder}/invoke-files/mint.neo-invoke.json",
+            "checkpoint": "${workspaceFolder}/cp2.nxp3-checkpoint",
+            "return-types": ["bool"],
+            "signers": [
+                {
+                    "account": "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME"
+                }
+            ],
+            "runtime": {
+                "witnesses": {
+                    "check-result": true
+                }
+            }
+        },
+        {
             "name": "deploy (fault)",
             "type": "neo-contract",
             "request": "launch",
@@ -34,6 +53,14 @@
                     "check-result": true
                 }
             }
+        },
+        {
+            "name": "mint (trace)",
+            "type": "neo-contract",
+            "request": "launch",
+            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
+            "trace-file": "0x7b7027ff74a9b1a0e26663adb790be9098b51c67cd74740ed6704e752456803d.neo-trace",
+            "return-types": ["bool"]
         },
         {
             "name": "deploy (trace)",
