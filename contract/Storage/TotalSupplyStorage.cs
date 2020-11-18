@@ -17,6 +17,5 @@ namespace ApocSample
         public static void Put(BigInteger value) => Storage.CurrentContext.CreateMap(mapName).Put(key, value);
 
         public static BigInteger Get() => Storage.CurrentContext.CreateMap(mapName).Get(key).ToBigInteger();
-
     }
 }
