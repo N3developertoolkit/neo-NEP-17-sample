@@ -1,4 +1,4 @@
 {
-    "contract": "../contract/bin/Debug/netstandard2.1/Apoc.nef",
+    "contract": "DevHawk.ApocToken",
     "operation": "deploy"
 }

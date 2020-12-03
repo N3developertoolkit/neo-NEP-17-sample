@@ -3,11 +3,11 @@
         "contract": "GAS",
         "operation": "transfer",
         "args": [
-            "@Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME","#../contract/bin/Debug/netstandard2.1/Apoc.nef", 10, null
+            "@Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME","#DevHawk.ApocToken", 10, null
         ]
     },
     {
-        "contract": "../contract/bin/Debug/netstandard2.1/Apoc.nef",
+        "contract": "DevHawk.ApocToken",
         "operation": "mint"
     }
 ]

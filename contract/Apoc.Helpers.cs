@@ -7,6 +7,6 @@ namespace ApocSample
     public partial class ApocToken : SmartContract
     {
         private static bool ValidateAddress(UInt160 address) => !address.IsZero;
-        private static bool IsPayable(UInt160 address) => Blockchain.GetContract(address)?.IsPayable ?? true;
+        private static bool IsContract(UInt160 address) => Blockchain.GetContract(address) != null;
     }
 }

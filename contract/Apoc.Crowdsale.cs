@@ -30,7 +30,7 @@ namespace ApocSample
 
         public static bool Mint()
         {
-            // if (Runtime.InvocationCounter != 1) throw new Exception("InvocationCounter must be 1.");
+            if (Runtime.InvocationCounter != 1) throw new Exception("InvocationCounter must be 1.");
 
             var notifications = Runtime.GetNotifications();
             if (notifications.Length == 0) throw new Exception("Contribution transaction not found.");

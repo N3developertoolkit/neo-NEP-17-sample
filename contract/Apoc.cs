@@ -6,10 +6,11 @@ using System.Numerics;
 
 namespace ApocSample
 {
+    [ManifestName("DevHawk.ApocToken")]
     [ManifestExtra("Author", "Harry Pierson")]
     [ManifestExtra("Email", "hpierson@ngd.neo.org")]
-    [ManifestExtra("Description", "This is a NEP5 example")]
-    [SupportedStandards("NEP5", "NEP10")]
+    [ManifestExtra("Description", "This is a NEP17 example")]
+    [SupportedStandards("NEP17", "NEP10")]
     // [Features(ContractFeatures.HasStorage | ContractFeatures.Payable)]
     public partial class ApocToken : SmartContract
     {
@@ -22,7 +23,7 @@ namespace ApocSample
         #endregion
 
         #region Notifications
-        [DisplayName("transfer")]
+        [DisplayName("Transfer")]
         public static event Action<UInt160, UInt160, BigInteger> OnTransfer;
         #endregion
 
@@ -30,8 +31,6 @@ namespace ApocSample
         // this method will be triggered as a VerificationTrigger to verify that the signature is correct.
         // For example, this method needs to be called when withdrawing token from the contract.
         public static bool Verify() => IsOwner();
-
-        public static string Name() => "Apoc Sample Token";
 
         public static string Symbol() => "APOC";
 
