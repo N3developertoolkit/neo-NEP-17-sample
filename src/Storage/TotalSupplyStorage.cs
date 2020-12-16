@@ -2,7 +2,7 @@ using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services.Neo;
 using System.Numerics;
 
-namespace ApocSample
+namespace DevHawk.Contracts
 {
     public static class TotalSupplyStorage
     {

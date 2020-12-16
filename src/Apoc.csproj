@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-mono-master-00397" />
+  </ItemGroup>
+
+  <Target Name="NeonBuild" AfterTargets="Build" Inputs="$(TargetPath)" 
+          Outputs="$(TargetDir)$(TargetName).nef;$(TargetDir)$(TargetName).nefdbgnfo;$(TargetDir)$(TargetName).manifest.json;$(TargetDir)$(TargetName).abi.json;">
+    <Exec WorkingDirectory="$(TargetDir)" Command="dotnet neon -f $(TargetFileName)"/>
+  </Target>
+
+</Project>

@@ -3,7 +3,7 @@ using Neo.SmartContract.Framework.Services.Neo;
 using Neo.SmartContract.Framework.Services.System;
 using System;
 
-namespace ApocSample
+namespace DevHawk.Contracts
 {
     public partial class ApocToken : SmartContract
     {
@@ -22,13 +22,25 @@ namespace ApocSample
         public static void Update(byte[] nefFile, string manifest)
         {
             if (!IsOwner()) throw new Exception("No authorization.");
-            Contract.Update(nefFile, manifest);
+            ManagementContract.Update(nefFile, manifest);
         }
 
         public static void Destroy()
         {
             if (!IsOwner()) throw new Exception("No authorization.");
-            Contract.Destroy();
+            ManagementContract.Destroy();
+        }
+
+        public static void EnablePayment()
+        {
+            if (!IsOwner()) throw new Exception("No authorization.");
+            AssetStorage.Enable();
+        }
+
+        public static void DisablePayment()
+        {
+            if (!IsOwner()) throw new Exception("No authorization.");
+            AssetStorage.Disable();
         }
 
         private static bool IsOwner() => Runtime.CheckWitness(Owner);

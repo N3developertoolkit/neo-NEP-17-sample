@@ -4,14 +4,13 @@ using System;
 using System.ComponentModel;
 using System.Numerics;
 
-namespace ApocSample
+namespace DevHawk.Contracts
 {
-    [ManifestName("DevHawk.ApocToken")]
+    [DisplayName("DevHawk.Contracts.ApocToken")]
     [ManifestExtra("Author", "Harry Pierson")]
-    [ManifestExtra("Email", "hpierson@ngd.neo.org")]
+    [ManifestExtra("Email", "harrypierson@hotmail.com")]
     [ManifestExtra("Description", "This is a NEP17 example")]
     [SupportedStandards("NEP17", "NEP10")]
-    // [Features(ContractFeatures.HasStorage | ContractFeatures.Payable)]
     public partial class ApocToken : SmartContract
     {
         #region Token Settings

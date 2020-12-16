@@ -5,7 +5,7 @@ using Neo.SmartContract.Framework.Services.System;
 using System;
 using System.Numerics;
 
-namespace ApocSample
+namespace DevHawk.Contracts
 {
     public partial class ApocToken : SmartContract
     {
@@ -31,7 +31,7 @@ namespace ApocSample
             OnTransfer(from, to, amount);
 
             // Validate payable
-            if (IsContract(to)) Contract.Call(to, "onPayment", new object[] { from, amount, data });
+            if (IsDeployed(to)) Contract.Call(to, "onPayment", new object[] { from, amount, data });
             return true;
         }
     }
