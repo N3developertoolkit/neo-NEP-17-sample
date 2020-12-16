@@ -13,4 +13,6 @@
     <Exec WorkingDirectory="$(TargetDir)" Command="dotnet neon -f $(TargetFileName)"/>
   </Target>
 
+  <Import Project="../neo-express.targets" />
+
 </Project>
