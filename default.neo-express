@@ -38,15 +38,15 @@
   ],
   "wallets": [
     {
-      "name": "apoc-owner",
+      "name": "owen",
       "accounts": [
         {
-          "private-key": "85fbe5d565d2eb87b9881c45b7ade4a00ade081d884370006dd0d026d04513f5",
-          "script-hash": "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME",
+          "private-key": "efdaacbcf0126ce39e282f8ea577320792eb614a97c06458ce9784c3d5122615",
+          "script-hash": "NM2BiALtwxBeCwC2vb5jeEiujwjvxifg4p",
           "label": null,
           "is-default": true,
           "contract": {
-            "script": "0c2103f1b82cb5d649e5e665f98438e462be8495e3bdc948f516624ac41b985a053a9c0b4195440d78",
+            "script": "0c2103c641e323e1744a1579396ae0417ae03b95a4e7a1959cd4fefa9c5834e852c4b60b4195440d78",
             "parameters": [
               "Signature"
             ]
