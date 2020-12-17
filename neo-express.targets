@@ -7,6 +7,8 @@
     <!-- TODO: remove invoke deploy from enable-payment file once https://github.com/neo-project/neo/issues/2158 is resolved -->
     <Exec Command="dotnet nxp3 contract invoke ./invoke-files/enable-payment.neo-invoke.json owen" WorkingDirectory="$(MSBuildThisFileDirectory)"/> 
     <Exec Command="dotnet nxp3 checkpoint create ./checkpoints/contract-deployed -f" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
+    <Exec Command="dotnet nxp3 transfer APOC 10000 owen alice" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
+    <Exec Command="dotnet nxp3 transfer APOC 10000 owen bob" WorkingDirectory="$(MSBuildThisFileDirectory)"/>
     <Touch Files="$(BaseIntermediateOutputPath)nxp3" AlwaysCreate="true" />
   </Target>
 
