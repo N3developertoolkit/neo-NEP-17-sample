@@ -1,6 +1,0 @@
-{
-    // TODO: remove contract invoke set-deploy-min once https://github.com/neo-project/neo/issues/2151 is resolved
-    "contract": "ManagementContract",
-    "operation": "setMinimumDeploymentFee",
-    "args": [ 10 ]
-}

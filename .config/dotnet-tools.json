@@ -3,13 +3,13 @@
   "isRoot": true,
   "tools": {
     "neo.express3": {
-      "version": "1.2.78-insiders",
+      "version": "1.2.79-insiders",
       "commands": [
         "nxp3"
       ]
     },
     "neo.neon": {
-      "version": "3.0.0-mono-master-00397",
+      "version": "3.0.0-mono-preview4-00286",
       "commands": [
         "neon"
       ]
