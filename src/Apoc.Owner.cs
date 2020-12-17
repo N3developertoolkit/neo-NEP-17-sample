@@ -7,8 +7,11 @@ namespace DevHawk.Contracts
 {
     public partial class ApocToken : SmartContract
     {
-        public static bool Deploy()
+        // TODO: Change name to _deploy once https://github.com/neo-project/neo/issues/2158 is fixed
+        public static void Deploy(bool update)
         {
+            if (update) return;
+
             if (!IsOwner()) throw new Exception("No authorization.");
             if (TotalSupplyStorage.Get() > 0) throw new Exception("Contract has been deployed.");
 
@@ -16,7 +19,6 @@ namespace DevHawk.Contracts
             AssetStorage.Increase(Owner, InitialSupply);
 
             OnTransfer(null, Owner, InitialSupply);
-            return true;
         }
 
         public static void Update(byte[] nefFile, string manifest)

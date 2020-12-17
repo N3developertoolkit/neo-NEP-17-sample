@@ -1,0 +1,43 @@
+[
+    {
+        "contract": "GasToken",
+        "operation": "transfer",
+        "args": [
+            "@NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4","@NM2BiALtwxBeCwC2vb5jeEiujwjvxifg4p", 1000000000000, null
+        ]
+    },
+    {
+        "contract": "NeoToken",
+        "operation": "transfer",
+        "args": [
+            "@NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4","@NM2BiALtwxBeCwC2vb5jeEiujwjvxifg4p", 10000, null
+        ]
+    },
+    {
+        "contract": "GasToken",
+        "operation": "transfer",
+        "args": [
+            "@NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4","@NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF", 1000000000000, null
+        ]
+    },
+    {
+        "contract": "NeoToken",
+        "operation": "transfer",
+        "args": [
+            "@NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4","@NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF", 10000, null
+        ]
+    },    {
+        "contract": "GasToken",
+        "operation": "transfer",
+        "args": [
+            "@NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4","@NSdazRqsfyjxrZpDSAV4jLKcMarPHCfhnp", 1000000000000, null
+        ]
+    },
+    {
+        "contract": "NeoToken",
+        "operation": "transfer",
+        "args": [
+            "@NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4","@NSdazRqsfyjxrZpDSAV4jLKcMarPHCfhnp", 10000, null
+        ]
+    }
+]

@@ -8,97 +8,33 @@
             "name": "deploy",
             "type": "neo-contract",
             "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "checkpoint": "${workspaceFolder}/checkpoints/invoke-deploy.nxp3-checkpoint",
+            "program": "${workspaceFolder}/src/bin/Debug/netstandard2.1/Apoc.nef",
             "invocation": {
                 "operation": "deploy",
-                "args": []
+                "args": [
+                    false
+                ]
             },
-            "signers": [
-                "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME"
-            ],
-            "runtime": {
-                "witnesses": {
-                    "check-result": true
-                }
-            },
-            "return-types": ["bool"]
         },
         {
             "name": "mint",
             "type": "neo-contract",
             "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
+            "program": "${workspaceFolder}/src/bin/Debug/netstandard2.1/Apoc.nef",
             "invocation": {
-                "invokeFile": "${workspaceFolder}/invoke-files/mint.neo-invoke.json",
-            },
-            "checkpoint": "${workspaceFolder}/checkpoints/invoke-mint.nxp3-checkpoint",
-            "return-types": [
-                "bool"
-            ],
-            "signers": [
-                {
-                    "account": "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME"
-                }
-            ],
-            "runtime": {
-                "witnesses": {
-                    "check-result": true
-                }
-            }
-        },
-        {
-            "name": "deploy (fault)",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "checkpoint": "${workspaceFolder}/checkpoints/invoke-mint.nxp3-checkpoint",
-            "invocation": {
-                "operation": "deploy",
-                "args": []
+                "contract": "GasToken",
+                "operation": "transfer",
+                "args": [
+                    "@NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF",
+                    "#DevHawk.Contracts.ApocToken",
+                    1000000000,
+                    null
+                ]
             },
             "signers": [
-                "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME"
+                "NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF"
             ],
-            "runtime": {
-                "witnesses": {
-                    "check-result": true
-                }
-            },
-            "return-types": ["bool"]
-        },
-        {
-            "name": "mint (trace)",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "invocation": {
-                "traceFile": "0x7b7027ff74a9b1a0e26663adb790be9098b51c67cd74740ed6704e752456803d.neo-trace",
-            },
-            "return-types": [
-                "bool"
-            ]
-        },
-        {
-            "name": "deploy (trace)",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "invocation": {
-                "traceFile": "trace-files/0x8d77e3f5b4d2411705cc89f5b8aeb178feed805777abe7b9599ebc9d493ffe95.neo-trace"
-            },
-            "return-types": [
-                "bool"
-            ]
-        },
-        {
-            "name": "deploy (trace + fault)",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "invocation": {
-                "traceFile": "trace-files/0x96a944d084a92ba9208b308077dbd5a7176973e5ed62507b2d287344263410dd.neo-trace"
-            },
+            "checkpoint": "${workspaceFolder}/checkpoints/contract-deployed.nxp3-checkpoint",
             "return-types": [
                 "bool"
             ]
