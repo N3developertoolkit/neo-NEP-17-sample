@@ -2,7 +2,7 @@ using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Services.Neo;
 using System.Numerics;
 
-namespace ApocSample
+namespace DevHawk.Contracts
 {
     public static class TotalSupplyStorage
     {
@@ -17,6 +17,5 @@ namespace ApocSample
         public static void Put(BigInteger value) => Storage.CurrentContext.CreateMap(mapName).Put(key, value);
 
         public static BigInteger Get() => Storage.CurrentContext.CreateMap(mapName).Get(key).ToBigInteger();
-
     }
 }

@@ -8,48 +8,36 @@
             "name": "deploy",
             "type": "neo-contract",
             "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "operation": "deploy",
-            "args": [],
-            "return-types": ["bool"],
-            "storage": [],
-            "runtime": {
-                "witnesses": {
-                    "check-result": true
-                }
-            }
+            "program": "${workspaceFolder}/src/bin/Debug/netstandard2.1/Apoc.nef",
+            "invocation": {
+                "operation": "deploy",
+                "args": [
+                    false
+                ]
+            },
         },
         {
-            "name": "deploy (fault)",
+            "name": "mint",
             "type": "neo-contract",
             "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "operation": "deploy",
-            "args": [],
-            "return-types": ["bool"],
-            "checkpoint": "${workspaceFolder}/checkpoints/cp2.nxp3-checkpoint",
-            "storage": [],
-            "runtime": {
-                "witnesses": {
-                    "check-result": true
-                }
-            }
-        },
-        {
-            "name": "deploy (trace)",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "trace-file": "trace-files/0x8d77e3f5b4d2411705cc89f5b8aeb178feed805777abe7b9599ebc9d493ffe95.neo-trace",
-            "return-types": ["bool"]
-        },
-        {
-            "name": "deploy (trace + fault)",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/contract/bin/Debug/netstandard2.1/Apoc.nef",
-            "trace-file": "trace-files/0x96a944d084a92ba9208b308077dbd5a7176973e5ed62507b2d287344263410dd.neo-trace",
-            "return-types": ["bool"]
+            "program": "${workspaceFolder}/src/bin/Debug/netstandard2.1/Apoc.nef",
+            "invocation": {
+                "contract": "GasToken",
+                "operation": "transfer",
+                "args": [
+                    "@NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF",
+                    "#DevHawk.Contracts.ApocToken",
+                    1000000000,
+                    null
+                ]
+            },
+            "signers": [
+                "NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF"
+            ],
+            "checkpoint": "${workspaceFolder}/checkpoints/contract-deployed.nxp3-checkpoint",
+            "return-types": [
+                "bool"
+            ]
         }
     ]
 }

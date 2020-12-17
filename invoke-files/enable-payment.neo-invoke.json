@@ -1,0 +1,14 @@
+[
+    // TODO: remove deploy invocation once https://github.com/neo-project/neo/issues/2158 is resolved 
+    {
+        "contract": "DevHawk.Contracts.ApocToken",
+        "operation": "deploy",
+        "args": [
+            false
+        ]
+    },
+    {
+        "contract": "DevHawk.Contracts.ApocToken",
+        "operation": "enablePayment"
+    }
+]

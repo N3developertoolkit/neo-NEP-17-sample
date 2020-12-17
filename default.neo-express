@@ -38,15 +38,49 @@
   ],
   "wallets": [
     {
-      "name": "apoc-owner",
+      "name": "owen",
       "accounts": [
         {
-          "private-key": "85fbe5d565d2eb87b9881c45b7ade4a00ade081d884370006dd0d026d04513f5",
-          "script-hash": "Nc2TJmEh7oM2wrXKdAQH5gHpy8HnyztcME",
+          "private-key": "efdaacbcf0126ce39e282f8ea577320792eb614a97c06458ce9784c3d5122615",
+          "script-hash": "NM2BiALtwxBeCwC2vb5jeEiujwjvxifg4p",
           "label": null,
           "is-default": true,
           "contract": {
-            "script": "0c2103f1b82cb5d649e5e665f98438e462be8495e3bdc948f516624ac41b985a053a9c0b4195440d78",
+            "script": "0c2103c641e323e1744a1579396ae0417ae03b95a4e7a1959cd4fefa9c5834e852c4b60b4195440d78",
+            "parameters": [
+              "Signature"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "alice",
+      "accounts": [
+        {
+          "private-key": "8374954a5aa6fab7be7b5b1f816c26dd2bdbc4109b63400a4a7ec4ec6a678e47",
+          "script-hash": "NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF",
+          "label": null,
+          "is-default": true,
+          "contract": {
+            "script": "0c210384520ef4df6c5f715630efb0873de20afc0a8d5f28a2c372efe82c7dd46949010b4195440d78",
+            "parameters": [
+              "Signature"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "bob",
+      "accounts": [
+        {
+          "private-key": "61962ff5215824618cead3feb3bd728ed39bf36c087efea6186f8daf1886dd2d",
+          "script-hash": "NSdazRqsfyjxrZpDSAV4jLKcMarPHCfhnp",
+          "label": null,
+          "is-default": true,
+          "contract": {
+            "script": "0c21026c033e21b862627464c38956f605e8303343c3d28eac24971593aa20cb2245e50b4195440d78",
             "parameters": [
               "Signature"
             ]

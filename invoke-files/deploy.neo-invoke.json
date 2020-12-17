@@ -1,4 +1,0 @@
-{
-    "contract": { "path":"../contract/bin/Debug/netstandard2.1/Apoc.nef" },
-    "operation": "deploy"
-}
