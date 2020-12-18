@@ -8,11 +8,14 @@ using Neo.Persistence;
 using Neo.SmartContract;
 using Neo.SmartContract.Native;
 using Neo.VM;
+using Neo.VM.Types;
 
 namespace NeoTestHarness
 {
     public static class Extensions
     {
+        public static string GetString(this StackItem item) 
+            => Neo.Utility.StrictUTF8.GetString(item.GetSpan());
 
         public static VMState AssertScript<T>(this TestApplicationEngine engine, Expression<Action<T>> expression)
             where T : class
@@ -129,17 +132,20 @@ namespace NeoTestHarness
         public static ContractState GetContract<T>(this StoreView store)
             where T : class
         {
-            var typeName = typeof(T).FullName;
+            var attrib = ContractAttribute.GetCustomAttribute(typeof(T), typeof(ContractAttribute));
+            var contractName = attrib is ContractAttribute contractAttrib
+                ? contractAttrib.Name : typeof(T).FullName;
+
             foreach (var contractState in NativeContract.Management.ListContracts(store))
             {
                 var name = contractState.Id >= 0 ? contractState.Manifest.Name : "Neo.SmartContract.Native." + contractState.Manifest.Name;
-                if (string.Equals(typeName, name))
+                if (string.Equals(contractName, name))
                 {
                     return contractState;
                 }
             }
 
-            throw new Exception($"couldn't find {typeName} contract");
+            throw new Exception($"couldn't find {contractName} contract");
         }
 
         public static VMState AssertExecute(this Neo.SmartContract.ApplicationEngine engine)

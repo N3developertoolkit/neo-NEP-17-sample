@@ -8,6 +8,7 @@ using Neo.BlockchainToolkit.Persistence;
 
 namespace NeoTestHarness
 {
+
     public class CheckpointFixture : IDisposable
     {
         string checkpointTempPath;

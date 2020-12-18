@@ -16,7 +16,7 @@ namespace NeoTestHarness
     using ServiceMethod = Func<TestApplicationEngine, IReadOnlyList<InteropParameterDescriptor>, Neo.VM.Types.StackItem?>;
     using StackItem = Neo.VM.Types.StackItem;
 
-    public class TestApplicationEngine : Neo.SmartContract.ApplicationEngine
+    public partial class TestApplicationEngine : Neo.SmartContract.ApplicationEngine
     {
         private readonly static IReadOnlyDictionary<uint, ServiceMethod> overriddenServices;
 
@@ -37,12 +37,16 @@ namespace NeoTestHarness
         private readonly WitnessChecker witnessChecker;
         private readonly Lazy<IReadOnlyList<UInt256>> blockIndexMap;
 
-        public TestApplicationEngine(StoreView snapshot) : this(TriggerType.Application, null, snapshot, ApplicationEngine.TestModeGas, _ => true)
+        public TestApplicationEngine(StoreView snapshot) : this(TriggerType.Application, null, snapshot, ApplicationEngine.TestModeGas, null)
+        {
+        }
+
+        public TestApplicationEngine(StoreView snapshot, UInt160 signer) : this(TriggerType.Application, new TestVerifiable(signer), snapshot, ApplicationEngine.TestModeGas, null)
         {
         }
 
         public TestApplicationEngine(TriggerType trigger, IVerifiable? container, StoreView snapshot, long gas, WitnessChecker? witnessChecker)
-            : base(trigger, container, snapshot, gas)
+            : base(trigger, container ?? new TestVerifiable(), snapshot, gas)
         {
             this.witnessChecker = witnessChecker ?? CheckWitness;
             this.blockIndexMap = new Lazy<IReadOnlyList<UInt256>>(() => LoadBlockIndexMap(snapshot));
