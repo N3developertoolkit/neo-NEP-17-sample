@@ -11,12 +11,15 @@ namespace test
         void destroy();
         void disablePayment();
         void enablePayment();
-        void onPayment(Neo.UInt160 from, System.Numerics.BigInteger amount, object data);
+        void onPayment(Neo.UInt160 from, System.Numerics.BigInteger amount, object? data);
         string symbol();
         System.Numerics.BigInteger totalSupply();
-        bool transfer(Neo.UInt160 from, Neo.UInt160 to, System.Numerics.BigInteger amount, object data);
+        bool transfer(Neo.UInt160 from, Neo.UInt160 to, System.Numerics.BigInteger amount, object? data);
         void update(byte[] nefFile, string manifest);
         bool verify();
-        event Action<Neo.UInt160, Neo.UInt160, System.Numerics.BigInteger> Transfer;
+        interface Events
+        {
+            void Transfer(Neo.UInt160 arg1, Neo.UInt160 arg2, System.Numerics.BigInteger arg3);
+        }
     }
 }
