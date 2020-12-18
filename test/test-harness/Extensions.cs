@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Reflection;
 using Neo;
 using Neo.BlockchainToolkit.Persistence;
@@ -15,6 +18,8 @@ using Neo.VM.Types;
 
 namespace NeoTestHarness
 {
+    using NeoStorage = IReadOnlyDictionary<ReadOnlyMemory<byte>, StorageItem>;
+
     public static class Extensions
     {
         // TestHarness replacement for Neo.Wallets.Helper.ToAddress that doesn't load protocol settings
@@ -90,18 +95,56 @@ namespace NeoTestHarness
             return builder.ToArray();
         }
 
-        public static IEnumerable<(byte[] key, StorageItem item)> GetContractStorages<T>(this StoreView store)
+        public static NeoStorage GetContractStorages<T>(this StoreView store)
             where T : class
         {
             var contract = store.GetContract<T>();
             var prefix = StorageKey.CreateSearchPrefix(contract.Id, default);
+
             return store.Storages.Find(prefix)
-                .Select(s => (s.Key.Key, s.Value));
+                .ToImmutableDictionary(s => (ReadOnlyMemory<byte>)s.Key.Key.AsMemory(), s => s.Value, MemoryEqualityComparer.Instance);
         }
 
-        public static StorageItem GetContractStorageItem<T>(this StoreView store, ReadOnlyMemory<byte> key)
-            where T : class
-            => store.GetContractStorages<T>().Single(s => s.key.AsSpan().SequenceEqual(key.Span)).item;
+        class MemoryEqualityComparer : IEqualityComparer<ReadOnlyMemory<byte>>
+        {
+            public static MemoryEqualityComparer Instance = new MemoryEqualityComparer();
+
+            private MemoryEqualityComparer() { }
+
+            public bool Equals([AllowNull] ReadOnlyMemory<byte> x, [AllowNull] ReadOnlyMemory<byte> y) => x.Span.SequenceEqual(y.Span);
+
+            public int GetHashCode([DisallowNull] ReadOnlyMemory<byte> obj)
+            {
+                unchecked
+                {
+                    int hash = 17;
+                    for (var i = 0; i < obj.Length; i++)
+                    {
+                        hash = hash * 23 + obj.Span[i].GetHashCode();
+                    }
+                    return hash;
+                }
+            }
+        }
+
+        public static NeoStorage StorageMap(this NeoStorage storages, string prefix)
+            => storages.StorageMap(Utility.StrictUTF8.GetBytes(prefix));
+
+        public static NeoStorage StorageMap(this NeoStorage storages, ReadOnlyMemory<byte> prefix)
+            => storages.Where(kvp => kvp.Key.Span.StartsWith(prefix.Span))
+                .ToImmutableDictionary(kvp => kvp.Key.Slice(prefix.Length), kvp => kvp.Value, MemoryEqualityComparer.Instance);
+
+        public static bool TryGetValue(this NeoStorage storage, string key, [NotNullWhen(true)] out StorageItem item)
+            => storage.TryGetValue(Utility.StrictUTF8.GetBytes(key), out item!);
+
+        public static bool TryGetValue(this NeoStorage storage, UInt160 key, [NotNullWhen(true)] out StorageItem item)
+            => storage.TryGetValue(Neo.IO.Helper.ToArray(key), out item!);
+
+        public static bool TryGetValue(this NeoStorage storage, UInt256 key, [NotNullWhen(true)] out StorageItem item)
+            => storage.TryGetValue(Neo.IO.Helper.ToArray(key), out item!);
+
+        public static BigInteger ToBigInteger(this StorageItem @this)
+            => new BigInteger(@this.Value);
 
         public static UInt160 GetContractAddress<T>(this StoreView store)
             where T : class

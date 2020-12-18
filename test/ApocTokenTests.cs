@@ -10,6 +10,7 @@ using Xunit;
 using NeoAssertions;
 
 using static test.Common;
+using System.Linq;
 
 namespace test
 {
@@ -21,6 +22,7 @@ namespace test
             public Fixture() : base(PATH) { }
         }
 
+        private const long TOTAL_SUPPLY = 2_000_000_000_000_000;
         readonly Fixture fixture;
 
         public ApocTokenTests(Fixture fixture)
@@ -82,7 +84,7 @@ namespace test
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
-            engine.ResultStack.Peek(0).Should().BeEquivalentTo(2_000_000_000_000_000);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(TOTAL_SUPPLY);
         }
 
         public static IEnumerable<object[]> GetBalances()
@@ -127,6 +129,29 @@ namespace test
                 .BeSentBy(snapshot.GetContract<ApocToken.Events>())
                 .And
                 .BeEquivalentTo<ApocToken.Events>(c => c.Transfer(sender, receiver, amount));
+        }
+
+        [Fact]
+        public void test_storage()
+        {
+            using var store = fixture.GetCheckpointStore();
+            using var snapshot = store.CreateSnapshot(new Block());
+
+            var storages = snapshot.GetContractStorages<ApocToken>();
+            storages.Should().HaveCount(3);
+
+            var assets = storages.StorageMap("asset");
+            assets.Should().HaveCount(2);
+            assets.TryGetValue("enable", out var enable).Should().BeTrue();
+            enable.Should().Be(1).And.NotBeConstant();
+            assets.TryGetValue(OWEN, out var owenBalance).Should().BeTrue();
+            owenBalance.Should().Be(TOTAL_SUPPLY).And.NotBeConstant();
+            assets.TryGetValue(ALICE, out var _).Should().BeFalse();
+
+            var contracts = storages.StorageMap("contract");
+            contracts.Should().HaveCount(1);
+            contracts.TryGetValue("totalSupply", out var totalSupply).Should().BeTrue();
+            totalSupply.Should().Be(TOTAL_SUPPLY).And.NotBeConstant();
         }
     }
 }

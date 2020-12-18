@@ -2,7 +2,7 @@ using System;
 
 namespace NeoTestHarness
 {
-    [AttributeUsage(AttributeTargets.Interface, AllowMultiple=false)]
+    [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
     public class ContractAttribute : Attribute
     {
         public string Name { get; private set; } = string.Empty;

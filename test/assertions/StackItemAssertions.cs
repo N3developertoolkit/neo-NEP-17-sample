@@ -11,9 +11,8 @@ namespace NeoAssertions
 {
     public class StackItemAssertions : ReferenceTypeAssertions<StackItem, StackItemAssertions>
     {
-        public StackItemAssertions(StackItem subject)
+        public StackItemAssertions(StackItem subject) : base(subject)
         {
-            Subject = subject;
         }
 
         protected override string Identifier => nameof(StackItem);
@@ -25,7 +24,7 @@ namespace NeoAssertions
                 Execute.Assertion
                     .BecauseOf(because, becauseArgs)
                     .ForCondition(Subject.IsNull)
-                    .FailWith("Expected {context:StackItem} to be null, but IsNull returned {0}.", Subject.IsNull);
+                    .FailWith("Expected {context:StackItem} to be null{reason}, but IsNull returned {0}.", Subject.IsNull);
 
                 return new AndConstraint<StackItemAssertions>(this);
             }
@@ -135,7 +134,7 @@ namespace NeoAssertions
                     .Then
                     .Given(() => new UInt160(Subject.GetSpan()))
                     .ForCondition(hash => hash == expected)
-                    .FailWith("Expected {context:StackItem} span to be {0}{reason}, but found {1}.", _ => expected, hash => hash);                  
+                    .FailWith("Expected {context:StackItem} span to be {0}{reason}, but found {1}.", _ => expected, hash => hash);
             }
             catch (Exception ex)
             {
@@ -160,7 +159,7 @@ namespace NeoAssertions
                     .Then
                     .Given(() => new UInt256(Subject.GetSpan()))
                     .ForCondition(hash => hash == expected)
-                    .FailWith("Expected {context:StackItem} to be {0}{reason}, but found {1}.", _ => expected, hash => hash);                  
+                    .FailWith("Expected {context:StackItem} to be {0}{reason}, but found {1}.", _ => expected, hash => hash);
             }
             catch (Exception ex)
             {

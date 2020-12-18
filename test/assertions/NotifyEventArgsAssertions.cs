@@ -11,11 +11,10 @@ using Neo.SmartContract.Manifest;
 
 namespace NeoAssertions
 {
-    public class NotifyEventArgsAssertions  : ReferenceTypeAssertions<NotifyEventArgs, NotifyEventArgsAssertions>
+    public class NotifyEventArgsAssertions : ReferenceTypeAssertions<NotifyEventArgs, NotifyEventArgsAssertions>
     {
-        public NotifyEventArgsAssertions(NotifyEventArgs subject) 
+        public NotifyEventArgsAssertions(NotifyEventArgs subject) : base(subject)
         {
-            Subject = subject;
         }
 
         protected override string Identifier => nameof(NotifyEventArgs);
@@ -24,7 +23,7 @@ namespace NeoAssertions
         {
             var methodCall = (MethodCallExpression)expected.Body;
             var methodArgs = methodCall.Arguments.Select(a => Expression.Lambda(a).Compile().DynamicInvoke());
-            
+
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.EventName == methodCall.Method.Name)

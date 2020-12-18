@@ -1,3 +1,4 @@
+using Neo.Ledger;
 using Neo.SmartContract;
 using Neo.VM.Types;
 
@@ -6,14 +7,10 @@ namespace NeoAssertions
 {
     public static class NeoAssertionsExtensions
     {
-        public static StackItemAssertions Should(this StackItem item)
-        {
-            return new StackItemAssertions(item);
-        }
+        public static StackItemAssertions Should(this StackItem item) => new StackItemAssertions(item);
 
-        public static NotifyEventArgsAssertions Should(this NotifyEventArgs args)
-        {
-            return new NotifyEventArgsAssertions(args);
-        }
+        public static NotifyEventArgsAssertions Should(this NotifyEventArgs args) => new NotifyEventArgsAssertions(args);
+
+        public static StorageItemAssertions Should(this StorageItem item) => new StorageItemAssertions(item);
     }
 }
