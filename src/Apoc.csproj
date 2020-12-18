@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-mono-preview4-00286" />
+    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-preview4" />
   </ItemGroup>
 
   <Target Name="NeonBuild" AfterTargets="Build" Inputs="$(TargetPath)" 
