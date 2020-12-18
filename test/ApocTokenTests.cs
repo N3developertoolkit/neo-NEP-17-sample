@@ -15,7 +15,6 @@ namespace test
 {
     public class ApocTokenTests : IClassFixture<ApocTokenTests.Fixture>
     {
-        // Fixture is used to share checkpoint across multiple tests
         public class Fixture : CheckpointFixture
         {
             const string PATH = "checkpoints/contract-deployed.nxp3-checkpoint";
@@ -123,13 +122,11 @@ namespace test
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
             engine.ResultStack.Peek(0).Should().BeTrue();
-
-
-            // Assert.True(engine.ResultStack.Pop().GetBoolean());
-            // Assert.Empty(engine.ResultStack);
-
-            // Assert.Single(engine.Notifications);
-            // engine.AssertNotification<ApocToken.Events>(0, c => c.Transfer(sender, receiver, amount));
+            engine.Notifications.Should().HaveCount(1);
+            engine.Notifications[0].Should()
+                .BeSentBy(snapshot.GetContract<ApocToken.Events>())
+                .And
+                .BeEquivalentTo<ApocToken.Events>(c => c.Transfer(sender, receiver, amount));
         }
     }
 }
