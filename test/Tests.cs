@@ -1,4 +1,6 @@
-using System.Linq;
+using System.Collections.Generic;
+using System.Numerics;
+using Neo;
 using Neo.Persistence;
 using NeoTestHarness;
 using Xunit;
@@ -61,6 +63,39 @@ namespace test
             engine.AssertScript<ApocToken>(c => c.verify());
 
             Assert.False(engine.ResultStack.Pop().GetBoolean());
+            Assert.Empty(engine.ResultStack);
+        }
+
+        [Fact]
+        public void test_initial_total_supply()
+        {
+            using var store = fixture.GetCheckpointStore();
+            using var snapshot = new SnapshotView(store);
+
+            using var engine = new TestApplicationEngine(snapshot, ALICE);
+            engine.AssertScript<ApocToken>(c => c.totalSupply());
+
+            Assert.Equal(2_000_000_000_000_000, engine.ResultStack.Pop().GetInteger());
+            Assert.Empty(engine.ResultStack);
+        }
+
+        public static IEnumerable<object[]> GetBalances()
+        {
+            yield return new object[] { OWEN, 2_000_000_000_000_000 };
+            yield return new object[] { ALICE, 0 };
+        }
+
+        [Theory]
+        [MemberData(nameof(GetBalances))]
+        public void test_balances(UInt160 account, BigInteger amount)
+        {
+            using var store = fixture.GetCheckpointStore();
+            using var snapshot = new SnapshotView(store);
+
+            using var engine = new TestApplicationEngine(snapshot);
+            engine.AssertScript<ApocToken>(c => c.balanceOf(account));
+
+            Assert.Equal(amount, engine.ResultStack.Pop().GetInteger());
             Assert.Empty(engine.ResultStack);
         }
     }

@@ -69,7 +69,7 @@ namespace NeoTestHarness
 
                 if (!ProtocolSettings.Initialize(protocolConfig))
                 {
-                    throw new Exception($"could not initialize protocol settings {initMagic} / {magic}");
+                    throw new Exception($"could not initialize protocol settings {initMagic} / {magic} / {ProtocolSettings.Default.Magic}");
                 }
             }
             else
