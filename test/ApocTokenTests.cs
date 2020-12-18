@@ -7,6 +7,7 @@ using Neo.Persistence;
 using Neo.VM;
 using NeoTestHarness;
 using Xunit;
+using NeoAssertions;
 
 using static test.Common;
 
@@ -38,10 +39,9 @@ namespace test
             engine.ExecuteScript<ApocToken>(c => c.symbol(), c => c.decimals());
 
             engine.State.Should().Be(VMState.HALT);
-
-            Assert.Equal(8, engine.ResultStack.Pop().GetInteger());
-            Assert.Equal("APOC", engine.ResultStack.Pop().GetString());
-            Assert.Empty(engine.ResultStack);
+            engine.ResultStack.Should().HaveCount(2);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(8);
+            engine.ResultStack.Peek(1).Should().BeEquivalentTo("APOC");
         }
 
         [Fact]
@@ -54,9 +54,8 @@ namespace test
             engine.ExecuteScript<ApocToken>(c => c.verify());
 
             engine.State.Should().Be(VMState.HALT);
-
-            Assert.True(engine.ResultStack.Pop().GetBoolean());
-            Assert.Empty(engine.ResultStack);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeTrue();
         }
 
         [Fact]
@@ -69,9 +68,8 @@ namespace test
             engine.ExecuteScript<ApocToken>(c => c.verify());
 
             engine.State.Should().Be(VMState.HALT);
-
-            Assert.False(engine.ResultStack.Pop().GetBoolean());
-            Assert.Empty(engine.ResultStack);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeFalse();
         }
 
         [Fact]
@@ -84,9 +82,8 @@ namespace test
             engine.ExecuteScript<ApocToken>(c => c.totalSupply());
 
             engine.State.Should().Be(VMState.HALT);
-
-            Assert.Equal(2_000_000_000_000_000, engine.ResultStack.Pop().GetInteger());
-            Assert.Empty(engine.ResultStack);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(2_000_000_000_000_000);
         }
 
         public static IEnumerable<object[]> GetBalances()
@@ -106,9 +103,8 @@ namespace test
             engine.ExecuteScript<ApocToken>(c => c.balanceOf(account));
 
             engine.State.Should().Be(VMState.HALT);
-
-            Assert.Equal(amount, engine.ResultStack.Pop().GetInteger());
-            Assert.Empty(engine.ResultStack);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(amount);
         }
 
         [Fact]
@@ -125,6 +121,8 @@ namespace test
             engine.ExecuteScript<ApocToken>(c => c.transfer(sender, receiver, amount, null));
 
             engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeTrue();
 
 
             // Assert.True(engine.ResultStack.Pop().GetBoolean());
