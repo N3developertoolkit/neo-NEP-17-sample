@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Neo;
 using Neo.Network.P2P.Payloads;
 using Neo.Persistence;
-using Neo.SmartContract;
 
 namespace NeoTestHarness
 {
