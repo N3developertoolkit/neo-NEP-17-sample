@@ -84,7 +84,7 @@ namespace test
 
         public static IEnumerable<object[]> GetBalances()
         {
-            yield return new object[] { OWEN, 2_000_000_000_000_000 };
+            yield return new object[] { OWEN, TOTAL_SUPPLY };
             yield return new object[] { ALICE, 0 };
         }
 
