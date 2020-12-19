@@ -1,6 +1,6 @@
 using System;
 
-namespace NeoTestHarness.Xunit
+namespace NeoTestHarness
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class CheckpointPathAttribute : Attribute

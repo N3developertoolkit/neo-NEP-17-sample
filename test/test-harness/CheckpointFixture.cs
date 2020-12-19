@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Neo;
 using Neo.BlockchainToolkit.Persistence;
 
-namespace NeoTestHarness.Xunit
+namespace NeoTestHarness
 {
     public abstract class CheckpointFixture : IDisposable
     {

@@ -11,7 +11,6 @@ using NeoAssertions;
 
 using static test.Common;
 using System.Linq;
-using NeoTestHarness.Xunit;
 
 namespace test
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace NeoTestHarness.Xunit
+namespace NeoTestHarness
 {
     public class CheckpointFixture<T> : CheckpointFixture
     {
