@@ -11,21 +11,17 @@ using NeoAssertions;
 
 using static test.Common;
 using System.Linq;
+using NeoTestHarness.Xunit;
 
 namespace test
 {
-    public class ApocTokenTests : IClassFixture<ApocTokenTests.Fixture>
+    [CheckpointPath("checkpoints/contract-deployed.nxp3-checkpoint")]
+    public class ApocTokenTests : IClassFixture<CheckpointFixture<ApocTokenTests>>
     {
-        public class Fixture : CheckpointFixture
-        {
-            const string PATH = "checkpoints/contract-deployed.nxp3-checkpoint";
-            public Fixture() : base(PATH) { }
-        }
-
         private const long TOTAL_SUPPLY = 2_000_000_000_000_000;
-        readonly Fixture fixture;
+        readonly CheckpointFixture fixture;
 
-        public ApocTokenTests(Fixture fixture)
+        public ApocTokenTests(CheckpointFixture<ApocTokenTests> fixture)
         {
             this.fixture = fixture;
         }

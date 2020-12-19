@@ -6,15 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Neo;
 using Neo.BlockchainToolkit.Persistence;
 
-namespace NeoTestHarness
+namespace NeoTestHarness.Xunit
 {
-
-    public class CheckpointFixture : IDisposable
+    public abstract class CheckpointFixture : IDisposable
     {
         string checkpointTempPath;
         RocksDbStore rocksDbStore;
 
-        protected CheckpointFixture(string checkpointPath)
+        public CheckpointFixture(string checkpointPath)
         {
             if (Path.IsPathFullyQualified(checkpointPath))
             {
@@ -42,17 +41,18 @@ namespace NeoTestHarness
             InitializeProtocolSettings(magic);
 
             rocksDbStore = RocksDbStore.OpenReadOnly(checkpointTempPath);
-        }
 
-        public CheckpointStore GetCheckpointStore()
-        {
-            return new CheckpointStore(rocksDbStore, false);
         }
 
         public void Dispose()
         {
             rocksDbStore.Dispose();
             if (Directory.Exists(checkpointTempPath)) Directory.Delete(checkpointTempPath, true);
+        }
+
+        public CheckpointStore GetCheckpointStore()
+        {
+            return new CheckpointStore(rocksDbStore, false);
         }
 
         static long initMagic = -1;
@@ -82,3 +82,4 @@ namespace NeoTestHarness
         }
     }
 }
+
