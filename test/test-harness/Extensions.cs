@@ -169,16 +169,11 @@ namespace NeoTestHarness
             {
                 if (type.IsNested)
                 {
-                    return GetContractName(type.DeclaringType ?? throw new Exception("reflection"));
+                    return GetContractName(type.DeclaringType ?? throw new Exception("reflection IsNested DeclaringType returned null"));
                 }
 
-                var attrib = ContractAttribute.GetCustomAttribute(type, typeof(ContractAttribute));
-                if (attrib is ContractAttribute contractAttrib)
-                {
-                    return contractAttrib.Name;
-                }
-
-                return type.FullName ?? throw new Exception("reflection");
+                var attrib = ContractAttribute.GetCustomAttribute(type, typeof(ContractAttribute)) as ContractAttribute;
+                return attrib?.Name ?? type.FullName ?? throw new Exception("reflection - FullName returned null");
             }
         }
     }
