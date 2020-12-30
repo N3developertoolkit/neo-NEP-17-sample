@@ -7,7 +7,7 @@ using Neo.Persistence;
 using Neo.VM;
 using NeoTestHarness;
 using Xunit;
-using NeoAssertions;
+using Neo.Assertions;
 
 using static test.Common;
 using System.Linq;
