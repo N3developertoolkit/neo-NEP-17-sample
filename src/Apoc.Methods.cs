@@ -31,7 +31,7 @@ namespace DevHawk.Contracts
             OnTransfer(from, to, amount);
 
             // Validate payable
-            if (IsDeployed(to)) Contract.Call(to, "onPayment", new object[] { from, amount, data });
+            // if (IsDeployed(to)) Contract.Call(to, "onPayment", new object[] { from, amount, data });
             return true;
         }
     }

@@ -16,6 +16,6 @@ namespace DevHawk.Contracts
 
         public static void Put(BigInteger value) => Storage.CurrentContext.CreateMap(mapName).Put(key, value);
 
-        public static BigInteger Get() => Storage.CurrentContext.CreateMap(mapName).Get(key).ToBigInteger();
+        public static BigInteger Get() => (BigInteger)Storage.CurrentContext.CreateMap(mapName).Get(key);
     }
 }

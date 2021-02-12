@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-preview4" />
+    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-preview5" />
   </ItemGroup>
 
   <Target Name="NeonBuild" AfterTargets="Build" Inputs="$(TargetPath)" 
@@ -13,6 +13,11 @@
     <Exec WorkingDirectory="$(TargetDir)" Command="dotnet neon -f $(TargetFileName)"/>
   </Target>
 
-  <Import Project="../neo-express.targets" />
+  <Target Name="NeoExpressBuild" AfterTargets="Build" 
+          Inputs="$(MSBuildThisFileDirectory)/bin/Debug/net5.0/Apoc.nef,$(MSBuildThisFileDirectory)/../express.batch"
+          Outputs="$(BaseIntermediateOutputPath)neoxp">
+    <Exec Command="dotnet neoxp batch express.batch --reset" WorkingDirectory="$(MSBuildThisFileDirectory)/.."/>
+    <Touch Files="$(BaseIntermediateOutputPath)neoxp" AlwaysCreate="true" />
+  </Target>
 
 </Project>
