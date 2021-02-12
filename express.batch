@@ -1,10 +1,10 @@
 transfer 10000 gas genesis owen
 transfer 10000 neo genesis owen
-transfer 10000 gas genesis alice
-transfer 10000 neo genesis alice
-transfer 10000 gas genesis bob
-transfer 10000 neo genesis bob
-# contract deploy ./src/bin/Debug/net5.0/Apoc.nef owen
+#transfer 10000 gas genesis alice
+#transfer 10000 neo genesis alice
+#transfer 10000 gas genesis bob
+#transfer 10000 neo genesis bob
+contract deploy ./src/bin/Debug/net5.0/Apoc.nef owen
 # checkpoint create ./checkpoints/contract-deployed -f
-# transfer 10000 APOC owen alice
-# transfer 10000 APOC owen bob
+transfer 10000 APOC owen alice
+transfer 10000 APOC owen bob
