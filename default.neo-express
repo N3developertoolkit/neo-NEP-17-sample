@@ -1,32 +1,33 @@
 {
-  "magic": 1311256446,
+  "magic": 88356171,
+  "address-version": 53,
   "consensus-nodes": [
     {
-      "tcp-port": 49333,
-      "ws-port": 49334,
-      "rpc-port": 49332,
+      "tcp-port": 50013,
+      "ws-port": 50014,
+      "rpc-port": 50012,
       "wallet": {
         "name": "node1",
         "accounts": [
           {
-            "private-key": "289ab8756772f0cf1856c32612249e2e4e3ea524c2ab37c3dc76148639a47935",
-            "script-hash": "NYjzhdekseMYWvYpSoAeypqMiwMuEUDhKB",
+            "private-key": "bec414bf29e0740bea90612e159ab9c562e24132377219ebc97c3076438704d5",
+            "script-hash": "NcoZZeG5zVGHuFNt53gRG7Ab7P3AAMkz2T",
             "label": null,
             "is-default": true,
             "contract": {
-              "script": "0c2102a4ac8ba3a19e687afe1ba1abd6d2c919c77ea68021c37817d1791c9f4344e4c50b4195440d78",
+              "script": "0c21038bc4ecab202f46696e4bc97f1117b2db9eecade8d9e0fb6da7054fe7f9f54b4841747476aa",
               "parameters": [
                 "Signature"
               ]
             }
           },
           {
-            "private-key": "289ab8756772f0cf1856c32612249e2e4e3ea524c2ab37c3dc76148639a47935",
-            "script-hash": "NaiyJQhFBKY2jJA1HLgjAgMvrEVu46o2y4",
-            "label": "MultiSigContract",
+            "private-key": "bec414bf29e0740bea90612e159ab9c562e24132377219ebc97c3076438704d5",
+            "script-hash": "NM1qFkmsYYbi8kE4fvEQubgGWWw7r97uU5",
+            "label": "Consensus MultiSigContract",
             "is-default": false,
             "contract": {
-              "script": "110c2102a4ac8ba3a19e687afe1ba1abd6d2c919c77ea68021c37817d1791c9f4344e4c5110b41138defaf",
+              "script": "110c21038bc4ecab202f46696e4bc97f1117b2db9eecade8d9e0fb6da7054fe7f9f54b4811417bce6ca5",
               "parameters": [
                 "Signature"
               ]
@@ -41,12 +42,12 @@
       "name": "owen",
       "accounts": [
         {
-          "private-key": "efdaacbcf0126ce39e282f8ea577320792eb614a97c06458ce9784c3d5122615",
-          "script-hash": "NM2BiALtwxBeCwC2vb5jeEiujwjvxifg4p",
+          "private-key": "377881998241f247d955d4546a98dac8e112d0e25dff6e62287b896f0caa4194",
+          "script-hash": "NgPQEWW3qoRMu14P9bYkrEvT8BLDfjEBE2",
           "label": null,
           "is-default": true,
           "contract": {
-            "script": "0c2103c641e323e1744a1579396ae0417ae03b95a4e7a1959cd4fefa9c5834e852c4b60b4195440d78",
+            "script": "0c210245d1ac643cf6ba0c8cfa7cd8f09a34e70cc806fd75931f975b9c0bdab4b551f141747476aa",
             "parameters": [
               "Signature"
             ]
@@ -58,12 +59,12 @@
       "name": "alice",
       "accounts": [
         {
-          "private-key": "8374954a5aa6fab7be7b5b1f816c26dd2bdbc4109b63400a4a7ec4ec6a678e47",
-          "script-hash": "NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF",
+          "private-key": "243276a0dd1a774b0bb24f8db86485d0e9e3e4ca562911a9b26daa7f6d3ca532",
+          "script-hash": "NVTz5d4bRv8L7raGzoBSzKsP6Vj4Re92Lq",
           "label": null,
           "is-default": true,
           "contract": {
-            "script": "0c210384520ef4df6c5f715630efb0873de20afc0a8d5f28a2c372efe82c7dd46949010b4195440d78",
+            "script": "0c2103e742f0dbe9429da50965aa6192d15273773d2e29024e2c48cf2de10a7229ce3f41747476aa",
             "parameters": [
               "Signature"
             ]
@@ -75,12 +76,12 @@
       "name": "bob",
       "accounts": [
         {
-          "private-key": "61962ff5215824618cead3feb3bd728ed39bf36c087efea6186f8daf1886dd2d",
-          "script-hash": "NSdazRqsfyjxrZpDSAV4jLKcMarPHCfhnp",
+          "private-key": "58a27e5887d22a5acfcab0011fe9991e76d67c2f7bcf26e197d477c9a75078ce",
+          "script-hash": "NbwikmqsG2ZtWmsdCMH3rH7v8tYB9XtHEp",
           "label": null,
           "is-default": true,
           "contract": {
-            "script": "0c21026c033e21b862627464c38956f605e8303343c3d28eac24971593aa20cb2245e50b4195440d78",
+            "script": "0c21024e06f3213ba5a700f336ab26d8049c29eb2896d6a8618747b8e7e3b1bdff18cd41747476aa",
             "parameters": [
               "Signature"
             ]
@@ -89,5 +90,5 @@
       ]
     }
   ],
-  "contracts": []
+  "settings": {}
 }
