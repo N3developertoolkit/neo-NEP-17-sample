@@ -3,13 +3,13 @@
   "isRoot": true,
   "tools": {
     "neo.express": {
-      "version": "2.0.41-preview-g43bf5b0975",
+      "version": "2.0.15-preview",
       "commands": [
         "neoxp"
       ]
     },
     "neo.neon": {
-      "version": "3.0.0-mono-master-00709",
+      "version": "3.0.0-mono-master-00720",
       "commands": [
         "neon"
       ]
