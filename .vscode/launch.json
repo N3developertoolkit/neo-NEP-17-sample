@@ -9,10 +9,26 @@
             "type": "neo-contract",
             "request": "launch",
             "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
+            "invocation": "deploy",
+        },
+        {
+            "name": "enable-payment (invoke-file)",
+            "type": "neo-contract",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
             "invocation": {
-                "deployContract": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef"
-            },
-            "signers": ["NM2BiALtwxBeCwC2vb5jeEiujwjvxifg4p"]
+                "invoke-file": "${workspaceFolder}/invoke-files/enable-payment.neo-invoke.json"
+            }
+        },
+        {
+            "name": "enable-payment",
+            "type": "neo-contract",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
+            "invocation": {
+                "operation": "enablePayment",
+                "args": []
+            }
         },
         {
             "name": "mint",

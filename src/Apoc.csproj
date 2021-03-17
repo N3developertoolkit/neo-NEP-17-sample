@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-mono-master-00695" />
+    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-mono-master-00709" />
   </ItemGroup>
 
   <Target Name="NeonBuild" AfterTargets="Build" Inputs="$(TargetPath)" 
@@ -13,9 +13,7 @@
     <Exec WorkingDirectory="$(TargetDir)" Command="dotnet neon -f $(TargetFileName)"/>
   </Target>
 
-  <Target Name="NeoExpressBuild" AfterTargets="Build" 
-          Inputs="$(MSBuildThisFileDirectory)/bin/Debug/net5.0/Apoc.nef,$(MSBuildThisFileDirectory)/../express.batch"
-          Outputs="$(BaseIntermediateOutputPath)neoxp">
+  <Target Name="NeoExpressBuild" AfterTargets="Build" Inputs="$(MSBuildThisFileDirectory)/bin/Debug/net5.0/apoc.nef" Outputs="$(BaseIntermediateOutputPath)neoxp">
     <Exec Command="dotnet neoxp batch express.batch --reset" WorkingDirectory="$(MSBuildThisFileDirectory)/.."/>
     <Touch Files="$(BaseIntermediateOutputPath)neoxp" AlwaysCreate="true" />
   </Target>

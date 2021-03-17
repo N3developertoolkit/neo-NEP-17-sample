@@ -5,8 +5,12 @@
     <Nullable>enable</Nullable>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <NeoTestPackagesVersion>1.0.10-preview</NeoTestPackagesVersion>
+    <NeoTestPackagesVersion>1.0.16-preview</NeoTestPackagesVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ContractUnderTest Include="..\src\Apoc.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
@@ -24,12 +28,5 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-
-  <Target Name="GenerateNeoContractInterface" BeforeTargets="PrepareForBuild">
-    <NeoContractInterface
-      ManifestFile="C:\Users\harry\Source\neo\seattle\samples\token-sample\src\bin\Debug\netstandard2.1\Apoc.manifest.json"
-      OutputFile="$(IntermediateOutputPath)\Apoc.contract-interface.cs"
-      RootNamespace="DevHawk.Contracts"/>
-  </Target>
 
 </Project>
