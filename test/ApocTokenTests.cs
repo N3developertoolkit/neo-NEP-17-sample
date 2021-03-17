@@ -1,152 +1,152 @@
-// using System.Collections.Generic;
-// using System.Numerics;
-// using FluentAssertions;
-// using Neo;
-// using Neo.Network.P2P.Payloads;
-// using Neo.Persistence;
-// using Neo.VM;
-// using NeoTestHarness;
-// using Xunit;
-// using Neo.Assertions;
+using System.Numerics;
+using FluentAssertions;
+using Neo;
+using Neo.VM;
+using NeoTestHarness;
+using Xunit;
+using Neo.Assertions;
+using Neo.BlockchainToolkit.SmartContract;
+using Neo.BlockchainToolkit.Models;
+using Neo.BlockchainToolkit;
 
-// using static test.Common;
-// using System.Linq;
+// TODO: fix generated contract interface namespace
+using DevHawk.RegistrarTests;
 
-// namespace test
-// {
-//     [CheckpointPath("checkpoints/contract-deployed.nxp3-checkpoint")]
-//     public class ApocTokenTests : IClassFixture<CheckpointFixture<ApocTokenTests>>
-//     {
-//         private const long TOTAL_SUPPLY = 2_000_000_000_000_000;
-//         readonly CheckpointFixture fixture;
+namespace test
+{
+    [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
+    public class ApocTokenTests : IClassFixture<CheckpointFixture<ApocTokenTests>>
+    {
+        private const long TOTAL_SUPPLY = 2_000_000_000_000_000;
+        readonly CheckpointFixture fixture;
+        readonly ExpressChain chain;
 
-//         public ApocTokenTests(CheckpointFixture<ApocTokenTests> fixture)
-//         {
-//             this.fixture = fixture;
-//         }
 
-//         [Fact]
-//         public void test_symbol_and_decimals()
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = new SnapshotView(store);
+        public ApocTokenTests(CheckpointFixture<ApocTokenTests> fixture)
+        {
+            this.fixture = fixture;
+            this.chain = fixture.FindChain();
+        }
 
-//             using var engine = new TestApplicationEngine(snapshot);
-//             engine.ExecuteScript<ApocToken>(c => c.symbol(), c => c.decimals());
+        [Fact]
+        public void test_symbol_and_decimals()
+        {
+            using var snapshot = fixture.GetSnapshot();
 
-//             engine.State.Should().Be(VMState.HALT);
-//             engine.ResultStack.Should().HaveCount(2);
-//             engine.ResultStack.Peek(0).Should().BeEquivalentTo(8);
-//             engine.ResultStack.Peek(1).Should().BeEquivalentTo("APOC");
-//         }
+            using var engine = new TestApplicationEngine(snapshot, ProtocolSettings.Default);
+            engine.ExecuteScript<ApocToken>(c => c.symbol(), c => c.decimals());
 
-//         [Fact]
-//         public void test_owen_is_owner()
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = new SnapshotView(store);
+            engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(2);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(8);
+            engine.ResultStack.Peek(1).Should().BeEquivalentTo("APOC");
+        }
 
-//             using var engine = new TestApplicationEngine(snapshot, OWEN);
-//             engine.ExecuteScript<ApocToken>(c => c.verify());
+        [Fact]
+        public void test_owen_is_owner()
+        {
+            var owen = chain.GetDefaultAccount("owen").ToScriptHash(chain.GetProtocolSettings().AddressVersion);
 
-//             engine.State.Should().Be(VMState.HALT);
-//             engine.ResultStack.Should().HaveCount(1);
-//             engine.ResultStack.Peek(0).Should().BeTrue();
-//         }
+            using var snapshot = fixture.GetSnapshot();
 
-//         [Fact]
-//         public void test_alice_is_not_owner()
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = new SnapshotView(store);
+            using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), owen);
+            engine.ExecuteScript<ApocToken>(c => c.verify());
 
-//             using var engine = new TestApplicationEngine(snapshot, ALICE);
-//             engine.ExecuteScript<ApocToken>(c => c.verify());
+            engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeTrue();
+        }
 
-//             engine.State.Should().Be(VMState.HALT);
-//             engine.ResultStack.Should().HaveCount(1);
-//             engine.ResultStack.Peek(0).Should().BeFalse();
-//         }
+        [Fact]
+        public void test_alice_is_not_owner()
+        {
+            var alice = chain.GetDefaultAccount("alice").ToScriptHash(chain.AddressVersion);
 
-//         [Fact]
-//         public void test_initial_total_supply()
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = new SnapshotView(store);
+            using var snapshot = fixture.GetSnapshot();
 
-//             using var engine = new TestApplicationEngine(snapshot, ALICE);
-//             engine.ExecuteScript<ApocToken>(c => c.totalSupply());
+            using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), alice);
+            engine.ExecuteScript<ApocToken>(c => c.verify());
 
-//             engine.State.Should().Be(VMState.HALT);
-//             engine.ResultStack.Should().HaveCount(1);
-//             engine.ResultStack.Peek(0).Should().BeEquivalentTo(TOTAL_SUPPLY);
-//         }
+            engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeFalse();
+        }
 
-//         public static IEnumerable<object[]> GetBalances()
-//         {
-//             yield return new object[] { OWEN, TOTAL_SUPPLY };
-//             yield return new object[] { ALICE, 0 };
-//         }
+        [Fact]
+        public void test_initial_total_supply()
+        {
+            using var snapshot = fixture.GetSnapshot();
 
-//         [Theory]
-//         [MemberData(nameof(GetBalances))]
-//         public void test_balances(UInt160 account, BigInteger amount)
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = store.CreateSnapshot();
+            using var engine = new TestApplicationEngine(snapshot, ProtocolSettings.Default);
+            engine.ExecuteScript<ApocToken>(c => c.totalSupply());
 
-//             using var engine = new TestApplicationEngine(snapshot);
-//             engine.ExecuteScript<ApocToken>(c => c.balanceOf(account));
+            engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(TOTAL_SUPPLY);
+        }
 
-//             engine.State.Should().Be(VMState.HALT);
-//             engine.ResultStack.Should().HaveCount(1);
-//             engine.ResultStack.Peek(0).Should().BeEquivalentTo(amount);
-//         }
+        [Theory]
+        [InlineData("owen", TOTAL_SUPPLY)]
+        [InlineData("alice", 0)]
+        public void test_balances(string accountName, long amount)
+        {
+            var settings = chain.GetProtocolSettings();
+            var account = chain.GetDefaultAccount(accountName).ToScriptHash(chain.AddressVersion);
 
-//         [Fact]
-//         public void test_transfer()
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = store.CreateSnapshot(new Block());
+            using var snapshot = fixture.GetSnapshot();
 
-//             var sender = OWEN;
-//             var receiver = ALICE;
-//             var amount = 1000;
+            using var engine = new TestApplicationEngine(snapshot, settings);
+            engine.ExecuteScript<ApocToken>(c => c.balanceOf(account));
 
-//             using var engine = new TestApplicationEngine(snapshot, sender);
-//             engine.ExecuteScript<ApocToken>(c => c.transfer(sender, receiver, amount, null));
+            engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(amount);
+        }
 
-//             engine.State.Should().Be(VMState.HALT);
-//             engine.ResultStack.Should().HaveCount(1);
-//             engine.ResultStack.Peek(0).Should().BeTrue();
-//             engine.Notifications.Should().HaveCount(1);
-//             engine.Notifications[0].Should()
-//                 .BeSentBy(snapshot.GetContract<ApocToken.Events>())
-//                 .And
-//                 .BeEquivalentTo<ApocToken.Events>(c => c.Transfer(sender, receiver, amount));
-//         }
+        [Fact]
+        public void test_transfer()
+        {
+            var sender = chain.GetDefaultAccount("owen").ToScriptHash(chain.AddressVersion);
+            var receiver = chain.GetDefaultAccount("alice").ToScriptHash(chain.AddressVersion);
+            var amount = 1000;
 
-//         [Fact]
-//         public void test_storage()
-//         {
-//             using var store = fixture.GetCheckpointStore();
-//             using var snapshot = store.CreateSnapshot(new Block());
+            using var snapshot = fixture.GetSnapshot();
+            using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), sender);
+            engine.ExecuteScript<ApocToken>(c => c.transfer(sender, receiver, amount, null));
 
-//             var storages = snapshot.GetContractStorages<ApocToken>();
-//             storages.Should().HaveCount(3);
+            engine.State.Should().Be(VMState.HALT);
+            engine.ResultStack.Should().HaveCount(1);
+            engine.ResultStack.Peek(0).Should().BeTrue();
+            engine.Notifications.Should().HaveCount(1);
+            engine.Notifications[0].Should()
+                .BeSentBy(snapshot.GetContract<ApocToken.Events>())
+                .And
+                .BeEquivalentTo<ApocToken.Events>(c => c.Transfer(sender, receiver, amount));
+        }
 
-//             var assets = storages.StorageMap("asset");
-//             assets.Should().HaveCount(2);
-//             assets.TryGetValue("enable", out var enable).Should().BeTrue();
-//             enable.Should().Be(1).And.NotBeConstant();
-//             assets.TryGetValue(OWEN, out var owenBalance).Should().BeTrue();
-//             owenBalance.Should().Be(TOTAL_SUPPLY).And.NotBeConstant();
-//             assets.TryGetValue(ALICE, out var _).Should().BeFalse();
+        // [Fact]
+        // public void test_storage()
+        // {
+        //     var owen = chain.GetDefaultAccount("owen").ToScriptHash(chain.AddressVersion);
+        //     var alice = chain.GetDefaultAccount("alice").ToScriptHash(chain.AddressVersion);
 
-//             var contracts = storages.StorageMap("contract");
-//             contracts.Should().HaveCount(1);
-//             contracts.TryGetValue("totalSupply", out var totalSupply).Should().BeTrue();
-//             totalSupply.Should().Be(TOTAL_SUPPLY).And.NotBeConstant();
-//         }
-//     }
-// }
+        //     using var snapshot = fixture.GetSnapshot();
+
+        //     var storages = snapshot.GetContractStorages<ApocToken>();
+        //     storages.Should().HaveCount(2);
+
+        //     var assets = storages.StorageMap("asset");
+        //     assets.Should().HaveCount(2);
+        //     assets.TryGetValue("enable", out var enable).Should().BeTrue();
+        //     enable.Should().Be(1);
+        //     assets.TryGetValue(owen, out var owenBalance).Should().BeTrue();
+        //     owenBalance.Should().Be(TOTAL_SUPPLY);
+        //     assets.TryGetValue(alice, out var _).Should().BeFalse();
+
+        //     var contracts = storages.StorageMap("contract");
+        //     contracts.Should().HaveCount(1);
+        //     contracts.TryGetValue("totalSupply", out var totalSupply).Should().BeTrue();
+        //     totalSupply.Should().Be(TOTAL_SUPPLY);
+        // }
+    }
+}
