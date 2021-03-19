@@ -9,10 +9,7 @@ using Neo.BlockchainToolkit.SmartContract;
 using Neo.BlockchainToolkit.Models;
 using Neo.BlockchainToolkit;
 
-// TODO: fix generated contract interface namespace
-using DevHawk.RegistrarTests;
-
-namespace test
+namespace ApocContractTests
 {
     [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
     public class ApocTokenTests : IClassFixture<CheckpointFixture<ApocTokenTests>>

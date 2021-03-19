@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LangVersion>8</LangVersion>
-    <Nullable>enable</Nullable>
-    <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <LangVersion>8</LangVersion>
     <NeoTestPackagesVersion>1.0.19-preview</NeoTestPackagesVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ApocContractTests</RootNamespace>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ContractUnderTest Include="..\src\Apoc.csproj" />
+    <ContractUnderTest Include="..\src\Apoc.csproj"  RootNamespace="$(RootNamespace)" />
   </ItemGroup>
 
   <ItemGroup>
