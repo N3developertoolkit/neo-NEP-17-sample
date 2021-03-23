@@ -8,6 +8,7 @@
             "name": "deploy",
             "type": "neo-contract",
             "request": "launch",
+            "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
             "neo-express": "${workspaceFolder}/default.neo-express",
             "invocation": "deploy",
@@ -16,6 +17,7 @@
             "name": "enable-payment (invoke-file)",
             "type": "neo-contract",
             "request": "launch",
+            "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
             "invocation": {
                 "invoke-file": "${workspaceFolder}/invoke-files/enable-payment.neo-invoke.json"
@@ -25,34 +27,12 @@
             "name": "enable-payment",
             "type": "neo-contract",
             "request": "launch",
+            "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
             "invocation": {
                 "operation": "enablePayment",
                 "args": []
             }
-        },
-        {
-            "name": "mint",
-            "type": "neo-contract",
-            "request": "launch",
-            "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
-            "invocation": {
-                "contract": "GasToken",
-                "operation": "transfer",
-                "args": [
-                    "@NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF",
-                    "#DevHawk.Contracts.ApocToken",
-                    1000000000,
-                    null
-                ]
-            },
-            "signers": [
-                "NSniVsBpPepBDYHzzygTbAoz1V6bbuyWnF"
-            ],
-            "checkpoint": "${workspaceFolder}/checkpoints/contract-deployed.nxp3-checkpoint",
-            "return-types": [
-                "bool"
-            ]
         }
     ]
 }
