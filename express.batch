@@ -1,12 +1,11 @@
-transfer 10000 gas genesis owen
-#transfer 10000 neo genesis owen
-#transfer 10000 gas genesis alice
-#transfer 10000 neo genesis alice
-#transfer 10000 gas genesis bob
-#transfer 10000 neo genesis bob
-contract deploy ./src/bin/Debug/net5.0/Apoc.nef owen
+transfer 100000 gas genesis owen
+contract deploy ./src/bin/Debug/net5.0/Apoc.nef owen -w Global
 checkpoint create ./checkpoints/contract-deployed -f
 contract invoke ./invoke-files/enable-payment.neo-invoke.json owen
+transfer 10000 neo genesis alice
+transfer 10000 gas genesis alice
 transfer 10000 APOC owen alice
+transfer 10000 neo genesis bob
+transfer 10000 gas genesis bob
 transfer 10000 APOC owen bob
 checkpoint create ./checkpoints/transfers-made -f

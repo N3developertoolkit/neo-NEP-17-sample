@@ -10,6 +10,7 @@ namespace DevHawk.Contracts
         public static void _deploy(object data, bool update)
         {
             if (update) return;
+            if (!IsOwner()) throw new Exception("No authorization.");
 
             if (TotalSupplyStorage.Get() > 0) throw new Exception("Contract has been deployed.");
 

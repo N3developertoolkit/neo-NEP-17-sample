@@ -9,6 +9,7 @@
             "type": "neo-contract",
             "request": "launch",
             "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
+            "neo-express": "${workspaceFolder}/default.neo-express",
             "invocation": "deploy",
         },
         {
