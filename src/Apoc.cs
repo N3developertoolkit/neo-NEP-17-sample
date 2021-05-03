@@ -1,4 +1,5 @@
 using Neo;
+using Neo.SmartContract;
 using Neo.SmartContract.Framework;
 using System;
 using System.ComponentModel;
@@ -16,7 +17,8 @@ namespace DevHawk.Contracts
         #region Token Settings
         static readonly ulong MaxSupply = 10_000_000_000_000_000;
         static readonly ulong InitialSupply = 2_000_000_000_000_000;
-        static readonly UInt160 Owner = "NcH2sq3SABdHYnvBUoPxv5ETQ7B5bTDEQ9".ToScriptHash();
+        [InitialValue("NeDbSeaBiqnWVJ339aRxgwP7vHAzeo44gK", ContractParameterType.Hash160)]
+        static readonly UInt160 Owner;
         static readonly ulong TokensPerNEO = 1_000_000_000;
         static readonly ulong TokensPerGAS = 1;
         #endregion

@@ -3,14 +3,14 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <LangVersion>8</LangVersion>
-    <NeoTestPackagesVersion>1.0.19-preview</NeoTestPackagesVersion>
+    <NeoTestPackagesVersion>1.0.25-preview</NeoTestPackagesVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>ApocContractTests</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ContractUnderTest Include="..\src\Apoc.csproj"  RootNamespace="$(RootNamespace)" />
+    <NeoContractReference Include="..\src\Apoc.csproj" />
   </ItemGroup>
 
   <ItemGroup>
