@@ -15,7 +15,6 @@ namespace ApocContractTests
     [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
     public class ApocTokenTests : IClassFixture<CheckpointFixture<ApocTokenTests>>
     {
-        const string contractName = "DevHawk.Contracts.ApocToken";
         const long TOTAL_SUPPLY = 2_000_000_000_000_000;
         readonly CheckpointFixture fixture;
         readonly ExpressChain chain;
@@ -30,14 +29,10 @@ namespace ApocContractTests
         public void test_symbol_and_decimals()
         {
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract(contractName);
-
-            using var builder = new ScriptBuilder();
-            builder.EmitDynamicCall(contract.Hash, "symbol");
-            builder.EmitDynamicCall(contract.Hash, "decimals");
+            var contract = snapshot.GetContract<ApocToken>();
 
             using var engine = new TestApplicationEngine(snapshot, ProtocolSettings.Default);
-            engine.ExecuteScript(builder.ToArray());
+            engine.ExecuteScript<ApocToken>(c => c.symbol(), c => c.decimals());
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(2);
@@ -51,13 +46,10 @@ namespace ApocContractTests
             var owen = chain.GetDefaultAccount("owen").ToScriptHash(chain.GetProtocolSettings().AddressVersion);
 
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract(contractName);
-
-            using var builder = new ScriptBuilder();
-            builder.EmitDynamicCall(contract.Hash, "verify");
+            var contract = snapshot.GetContract<ApocToken>();
 
             using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), owen);
-            engine.ExecuteScript(builder.ToArray());
+            engine.ExecuteScript<ApocToken>(c => c.verify());
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -70,13 +62,10 @@ namespace ApocContractTests
             var alice = chain.GetDefaultAccount("alice").ToScriptHash(chain.AddressVersion);
 
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract(contractName);
-
-            using var builder = new ScriptBuilder();
-            builder.EmitDynamicCall(contract.Hash, "verify");
+            var contract = snapshot.GetContract<ApocToken>();
 
             using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), alice);
-            engine.ExecuteScript(builder.ToArray());
+            engine.ExecuteScript<ApocToken>(c => c.verify());
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -87,13 +76,10 @@ namespace ApocContractTests
         public void test_initial_total_supply()
         {
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract(contractName);
-
-            using var builder = new ScriptBuilder();
-            builder.EmitDynamicCall(contract.Hash, "totalSupply");
+            var contract = snapshot.GetContract<ApocToken>();
 
             using var engine = new TestApplicationEngine(snapshot, ProtocolSettings.Default);
-            engine.ExecuteScript(builder.ToArray());
+            engine.ExecuteScript<ApocToken>(c => c.totalSupply());
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -109,13 +95,10 @@ namespace ApocContractTests
             var account = chain.GetDefaultAccount(accountName).ToScriptHash(chain.AddressVersion);
 
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract(contractName);
-
-            using var builder = new ScriptBuilder();
-            builder.EmitDynamicCall(contract.Hash, "balanceOf", account);
+            var contract = snapshot.GetContract<ApocToken>();
 
             using var engine = new TestApplicationEngine(snapshot, settings);
-            engine.ExecuteScript(builder.ToArray());
+            engine.ExecuteScript<ApocToken>(c => c.balanceOf(account));
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
@@ -130,13 +113,10 @@ namespace ApocContractTests
             var amount = 1000;
 
             using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract(contractName);
-
-            using var builder = new ScriptBuilder();
-            builder.EmitDynamicCall(contract.Hash, "transfer", sender, receiver, amount, null);
+            var contract = snapshot.GetContract<ApocToken>();
 
             using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), sender);
-            engine.ExecuteScript(builder.ToArray());
+            engine.ExecuteScript<ApocToken>(c => c.transfer(sender, receiver, amount, null));
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(1);
