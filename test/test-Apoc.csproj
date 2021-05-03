@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <LangVersion>8</LangVersion>
     <NeoTestPackagesVersion>1.0.25-preview</NeoTestPackagesVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>ApocContractTests</RootNamespace>

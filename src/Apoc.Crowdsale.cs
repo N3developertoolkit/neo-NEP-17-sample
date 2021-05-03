@@ -46,7 +46,7 @@ namespace DevHawk.Contracts
             AssetStorage.Increase(tx.Sender, amount);
             TotalSupplyStorage.Increase(amount);
 
-            OnTransfer(null, tx.Sender, amount);
+            OnTransfer(UInt160.Zero, tx.Sender, amount);
         }
     }
 }

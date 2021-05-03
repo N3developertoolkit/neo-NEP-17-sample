@@ -1,3 +1,4 @@
+using Neo;
 using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Native;
 using Neo.SmartContract.Framework.Services;
@@ -17,7 +18,7 @@ namespace DevHawk.Contracts
             TotalSupplyStorage.Increase(InitialSupply);
             AssetStorage.Increase(Owner, InitialSupply);
 
-            OnTransfer(null, Owner, InitialSupply);
+            OnTransfer(UInt160.Zero, Owner, InitialSupply);
         }
 
         public static void Update(ByteString nefFile, string manifest)

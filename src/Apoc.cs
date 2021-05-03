@@ -17,17 +17,21 @@ namespace DevHawk.Contracts
         #region Token Settings
         static readonly ulong MaxSupply = 10_000_000_000_000_000;
         static readonly ulong InitialSupply = 2_000_000_000_000_000;
-        [InitialValue("NeDbSeaBiqnWVJ339aRxgwP7vHAzeo44gK", ContractParameterType.Hash160)]
-        static readonly UInt160 Owner;
         static readonly ulong TokensPerNEO = 1_000_000_000;
         static readonly ulong TokensPerGAS = 1;
         #endregion
+
+#nullable disable
+#pragma warning disable CS0649
+        [InitialValue("NeDbSeaBiqnWVJ339aRxgwP7vHAzeo44gK", ContractParameterType.Hash160)]
+        static readonly UInt160 Owner;
+#pragma warning restore
 
         #region Notifications
         [DisplayName("Transfer")]
         public static event Action<UInt160, UInt160, BigInteger> OnTransfer;
         #endregion
-
+#nullable restore
         // When this contract address is included in the transaction signature,
         // this method will be triggered as a VerificationTrigger to verify that the signature is correct.
         // For example, this method needs to be called when withdrawing token from the contract.
