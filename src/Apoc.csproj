@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <TargetContractName>DevHawk.Contracts.ApocToken</TargetContractName>
+    <TargetNeoContractName>DevHawk.Contracts.ApocToken</TargetNeoContractName>
     <NeoExpressBatch>..\express.batch</NeoExpressBatch>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-rc2" />
-    <PackageReference Include="Neo.BuildTasks" Version="1.0.25-preview-g74a14f0732" PrivateAssets="All" />
+    <PackageReference Include="Neo.BuildTasks" Version="1.0.25-preview" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>

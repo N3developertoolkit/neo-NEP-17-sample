@@ -3,17 +3,21 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <LangVersion>8</LangVersion>
-    <NeoTestPackagesVersion>1.0.19-preview</NeoTestPackagesVersion>
+    <NeoTestPackagesVersion>1.0.25-preview</NeoTestPackagesVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>ApocContractTests</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <NeoContractReference Include="..\src\Apoc.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Neo.Assertions" Version="$(NeoTestPackagesVersion)" />
-    <PackageReference Include="Neo.BuildTasks" Version="1.0.25-preview-g74a14f0732" PrivateAssets="All" />
+    <PackageReference Include="Neo.BuildTasks" Version="$(NeoTestPackagesVersion)" PrivateAssets="All" />
     <PackageReference Include="Neo.Test.Harness" Version="$(NeoTestPackagesVersion)" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
