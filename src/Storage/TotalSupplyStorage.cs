@@ -1,5 +1,4 @@
-using Neo.SmartContract.Framework;
-using Neo.SmartContract.Framework.Services.Neo;
+using Neo.SmartContract.Framework.Services;
 using System.Numerics;
 
 namespace DevHawk.Contracts
@@ -14,8 +13,8 @@ namespace DevHawk.Contracts
 
         public static void Reduce(BigInteger value) => Put(Get() - value);
 
-        public static void Put(BigInteger value) => Storage.CurrentContext.CreateMap(mapName).Put(key, value);
+        public static void Put(BigInteger value) => new StorageMap(Storage.CurrentContext, mapName).Put(key, value);
 
-        public static BigInteger Get() => (BigInteger)Storage.CurrentContext.CreateMap(mapName).Get(key);
+        public static BigInteger Get() => (BigInteger)new StorageMap(Storage.CurrentContext, mapName).Get(key);
     }
 }

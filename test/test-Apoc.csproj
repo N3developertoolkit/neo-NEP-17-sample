@@ -10,14 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ContractUnderTest Include="..\src\Apoc.csproj"  RootNamespace="$(RootNamespace)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Neo.Assertions" Version="$(NeoTestPackagesVersion)" />
-    <PackageReference Include="Neo.BuildTasks" Version="$(NeoTestPackagesVersion)" PrivateAssets="All" />
+    <PackageReference Include="Neo.BuildTasks" Version="1.0.25-preview-g74a14f0732" PrivateAssets="All" />
     <PackageReference Include="Neo.Test.Harness" Version="$(NeoTestPackagesVersion)" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">

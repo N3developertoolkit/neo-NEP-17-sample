@@ -2,20 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <TargetContractName>DevHawk.Contracts.ApocToken</TargetContractName>
+    <NeoExpressBatch>..\express.batch</NeoExpressBatch>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-rc1" />
+    <PackageReference Include="Neo.SmartContract.Framework" Version="3.0.0-rc2" />
+    <PackageReference Include="Neo.BuildTasks" Version="1.0.25-preview-g74a14f0732" PrivateAssets="All" />
   </ItemGroup>
-
-  <Target Name="NeonBuild" AfterTargets="Build" Inputs="$(TargetPath)" 
-          Outputs="$(TargetDir)$(TargetName).nef;$(TargetDir)$(TargetName).nefdbgnfo;$(TargetDir)$(TargetName).manifest.json;$(TargetDir)$(TargetName).abi.json;">
-    <Exec WorkingDirectory="$(TargetDir)" Command="dotnet neon -f $(TargetFileName)"/>
-  </Target>
-
-  <Target Name="NeoExpressBuild" AfterTargets="Build" Inputs="$(MSBuildThisFileDirectory)/bin/Debug/net5.0/apoc.nef" Outputs="$(BaseIntermediateOutputPath)neoxp">
-    <Exec Command="dotnet neoxp batch express.batch --reset" WorkingDirectory="$(MSBuildThisFileDirectory)/.."/>
-    <Touch Files="$(BaseIntermediateOutputPath)neoxp" AlwaysCreate="true" />
-  </Target>
 
 </Project>

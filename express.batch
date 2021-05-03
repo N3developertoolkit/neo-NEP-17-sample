@@ -1,5 +1,5 @@
 transfer 100000 gas genesis owen
-contract deploy ./src/bin/Debug/net5.0/Apoc.nef owen -w Global
+contract deploy ./src/bin/sc/DevHawk.Contracts.ApocToken.nef owen -w Global
 checkpoint create ./checkpoints/contract-deployed -f
 contract invoke ./invoke-files/enable-payment.neo-invoke.json owen
 transfer 10000 neo genesis alice
