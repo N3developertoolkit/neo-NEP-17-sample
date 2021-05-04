@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <ContractManifestPath>..\src\bin\sc\DevHawk.Contracts.ApocToken.manifest.json</ContractManifestPath>
-    <ContractName>DevHawk.Contracts.ApocToken</ContractName>
     <IsPackable>false</IsPackable>
+    <NeoContractManifestPath>..\src\bin\sc\DevHawk.Contracts.ApocToken.manifest.json</NeoContractManifestPath>
+    <NeoContractName>DevHawk.Contracts.ApocToken</NeoContractName>
     <NeoTestPackagesVersion>1.0.25-preview</NeoTestPackagesVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>ApocContractTests</RootNamespace>
@@ -35,19 +35,19 @@
 
   <Target Name="ConfigureNeoContractInterface" BeforeTargets="ExecuteNeoContractInterface">
     <PropertyGroup>
-      <_ContractManifestPath>$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(ContractManifestPath)'))</_ContractManifestPath>
-      <_ContractInterfacePath>$([MSBuild]::NormalizePath('$(IntermediateOutputPath)', '$(ContractName).contract-interface.cs'))</_ContractInterfacePath>
+      <_NeoContractManifestPath>$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '$(NeoContractManifestPath)'))</_NeoContractManifestPath>
+      <_NeoContractInterfacePath>$([MSBuild]::NormalizePath('$(IntermediateOutputPath)', '$(NeoContractName).contract-interface.cs'))</_NeoContractInterfacePath>
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Include="$(_ContractInterfacePath)" />
+      <Compile Include="$(_NeoContractInterfacePath)" />
     </ItemGroup>
   </Target>
 
   <Target Name="ExecuteNeoContractInterface" BeforeTargets="ResolveProjectReferences"
-          Inputs="$(_ContractManifestPath)"
-          Outputs="$(_ContractInterfacePath)">
-    <NeoContractInterface ManifestFile="$(_ContractManifestPath)" OutputFile="$(_ContractInterfacePath)" RootNamespace="$(RootNamespace)"/>
+          Inputs="$(_NeoContractManifestPath)"
+          Outputs="$(_NeoContractInterfacePath)">
+    <NeoContractInterface ManifestFile="$(_NeoContractManifestPath)" OutputFile="$(_NeoContractInterfacePath)" RootNamespace="$(RootNamespace)"/>
   </Target>
 
 </Project>
