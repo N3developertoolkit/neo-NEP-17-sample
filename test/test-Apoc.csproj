@@ -4,7 +4,7 @@
     <IsPackable>false</IsPackable>
     <NeoContractManifestPath>..\src\bin\sc\DevHawk.Contracts.ApocToken.manifest.json</NeoContractManifestPath>
     <NeoContractName>DevHawk.Contracts.ApocToken</NeoContractName>
-    <NeoTestPackagesVersion>1.0.25-preview</NeoTestPackagesVersion>
+    <NeoTestPackagesVersion>1.0.27-preview</NeoTestPackagesVersion>
     <Nullable>enable</Nullable>
     <RootNamespace>ApocContractTests</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
