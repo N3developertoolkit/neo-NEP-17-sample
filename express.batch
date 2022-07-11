@@ -1,11 +1,11 @@
 transfer 100000 gas genesis owen
-contract deploy ./src/bin/sc/DevHawk.Contracts.ApocToken.nef owen -w Global
+contract deploy ./src/bin/sc/ApocToken.nef owen
 checkpoint create ./checkpoints/contract-deployed -f
-contract invoke ./invoke-files/enable-payment.neo-invoke.json owen
-transfer 10000 neo genesis alice
-transfer 10000 gas genesis alice
-transfer 10000 APOC owen alice
-transfer 10000 neo genesis bob
-transfer 10000 gas genesis bob
-transfer 10000 APOC owen bob
-checkpoint create ./checkpoints/transfers-made -f
+contract run DevHawk.Contracts.ApocToken mint @alice 10000000000 -a owen
+#transfer 10000 neo genesis alice
+#transfer 10000 gas genesis alice
+#transfer 10000 APOC owen alice
+#transfer 10000 neo genesis bob
+#transfer 10000 gas genesis bob
+#transfer 10000 APOC owen bob
+#checkpoint create ./checkpoints/transfers-made -f
