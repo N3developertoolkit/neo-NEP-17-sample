@@ -10,16 +10,16 @@ using Neo.BlockchainToolkit.Models;
 using Neo.BlockchainToolkit;
 using Neo.SmartContract;
 
-namespace ApocContractTests
+namespace ApocTokenTests
 {
     [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
-    public class ApocTokenTests : IClassFixture<CheckpointFixture<ApocTokenTests>>
+    public class TestApocToken : IClassFixture<CheckpointFixture<TestApocToken>>
     {
         const long TOTAL_SUPPLY = 2_000_000_000_000_000;
         readonly CheckpointFixture fixture;
         readonly ExpressChain chain;
 
-        public ApocTokenTests(CheckpointFixture<ApocTokenTests> fixture)
+        public TestApocToken(CheckpointFixture<TestApocToken> fixture)
         {
             this.fixture = fixture;
             this.chain = fixture.FindChain();
@@ -38,38 +38,6 @@ namespace ApocContractTests
             engine.ResultStack.Should().HaveCount(2);
             engine.ResultStack.Peek(0).Should().BeEquivalentTo(8);
             engine.ResultStack.Peek(1).Should().BeEquivalentTo("APOC");
-        }
-
-        [Fact]
-        public void test_owen_is_owner()
-        {
-            var owen = chain.GetDefaultAccount("owen").ToScriptHash(chain.GetProtocolSettings().AddressVersion);
-
-            using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract<ApocToken>();
-
-            using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), owen);
-            engine.ExecuteScript<ApocToken>(c => c.verify());
-
-            engine.State.Should().Be(VMState.HALT);
-            engine.ResultStack.Should().HaveCount(1);
-            engine.ResultStack.Peek(0).Should().BeTrue();
-        }
-
-        [Fact]
-        public void test_alice_is_not_owner()
-        {
-            var alice = chain.GetDefaultAccount("alice").ToScriptHash(chain.AddressVersion);
-
-            using var snapshot = fixture.GetSnapshot();
-            var contract = snapshot.GetContract<ApocToken>();
-
-            using var engine = new TestApplicationEngine(snapshot, chain.GetProtocolSettings(), alice);
-            engine.ExecuteScript<ApocToken>(c => c.verify());
-
-            engine.State.Should().Be(VMState.HALT);
-            engine.ResultStack.Should().HaveCount(1);
-            engine.ResultStack.Peek(0).Should().BeFalse();
         }
 
         [Fact]
