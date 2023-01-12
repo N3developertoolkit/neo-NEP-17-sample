@@ -10,12 +10,17 @@ using System.Numerics;
 
 namespace DevHawk.Contracts
 {
-    [DisplayName("DevHawk.Contracts.ApocToken")]
+    [DisplayName("ApocToken")]
     [ManifestExtra("Author", "Harry Pierson")]
     [ManifestExtra("Email", "harrypierson@hotmail.com")]
     [ManifestExtra("Description", "This is a NEP17 example")]
+    [SupportedStandards("NEP-17")]
     public class ApocToken : SmartContract
     {
+        const string SYMBOL = "APOC";
+        const byte DECIMALS = 8;
+        const long INITIAL_SUPPLY = 1_000_000;
+
         public delegate void OnTransferDelegate(UInt160 from, UInt160 to, BigInteger amount);
 
         [DisplayName("Transfer")]
@@ -26,10 +31,10 @@ namespace DevHawk.Contracts
         const byte Prefix_ContractOwner = 0xFF;
 
         [Safe]
-        public static string Symbol() => "APOC";
+        public static string Symbol() => SYMBOL;
 
         [Safe]
-        public static byte Decimals() => 8;
+        public static byte Decimals() => DECIMALS;
 
         [Safe]
         public static BigInteger TotalSupply() => (BigInteger)Storage.Get(Storage.CurrentContext, new byte[] { Prefix_TotalSupply });
@@ -62,19 +67,16 @@ namespace DevHawk.Contracts
             return true;
         }
 
-        public void Mint(UInt160 account, BigInteger amount)
+        public static void Mint(UInt160 account, BigInteger amount)
         {
             if (amount.IsZero) return;
             if (amount.Sign < 0) throw new ArgumentOutOfRangeException(nameof(amount));
             if (!Runtime.CheckWitness(GetOwner()))
                 throw new Exception("contract owner must sign mint operations");
-
-            UpdateBalance(account, +amount);
-            UpdateTotalSupply(+amount);
-            PostTransfer(null, account, amount, null);
+            CreateTokens(account, amount);
         }
 
-        public void Burn(UInt160 account, BigInteger amount)
+        public static void Burn(UInt160 account, BigInteger amount)
         {
             if (amount.IsZero) return;
             if (amount.Sign < 0) throw new ArgumentOutOfRangeException(nameof(amount));
@@ -120,13 +122,17 @@ namespace DevHawk.Contracts
         }
 
         [DisplayName("_deploy")]
-        public void Deploy(object data, bool update)
+#pragma warning disable IDE0060
+        public static void Deploy(object data, bool update)
+#pragma warning restore IDE0060
         {
             if (update) return;
 
             byte[] key = new byte[] { Prefix_ContractOwner };
             var tx = (Transaction)Runtime.ScriptContainer;
             Storage.Put(Storage.CurrentContext, key, tx.Sender);
+
+            CreateTokens(tx.Sender, INITIAL_SUPPLY * BigInteger.Pow(10, DECIMALS));
         }
 
         public static void Update(ByteString nefFile, string manifest)
@@ -135,6 +141,13 @@ namespace DevHawk.Contracts
             if (!Runtime.CheckWitness(owner))
                 throw new Exception("contract owner must sign update operations");
             ContractManagement.Update(nefFile, manifest, null);
+        }
+
+        static void CreateTokens(UInt160 account, BigInteger amount)
+        {
+            UpdateBalance(account, +amount);
+            UpdateTotalSupply(+amount);
+            PostTransfer(null, account, amount, null);
         }
 
         static UInt160 GetOwner()

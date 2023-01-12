@@ -9,7 +9,7 @@
             "type": "neo-contract",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
+            "program": "${workspaceFolder}/src/bin/sc/ApocToken.nef",
             "neo-express": "${workspaceFolder}/default.neo-express",
             "invocation": "deploy",
         },
@@ -18,7 +18,7 @@
             "type": "neo-contract",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
+            "program": "${workspaceFolder}/src/bin/sc/ApocToken.nef",
             "invocation": {
                 "invoke-file": "${workspaceFolder}/invoke-files/enable-payment.neo-invoke.json"
             }
@@ -28,7 +28,7 @@
             "type": "neo-contract",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/bin/Debug/net5.0/Apoc.nef",
+            "program": "${workspaceFolder}/src/bin/sc/ApocToken.nef",
             "invocation": {
                 "operation": "enablePayment",
                 "args": []

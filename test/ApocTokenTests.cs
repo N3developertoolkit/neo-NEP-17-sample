@@ -13,13 +13,16 @@ using Neo.SmartContract;
 namespace ApocTokenTests
 {
     [CheckpointPath("checkpoints/contract-deployed.neoxp-checkpoint")]
-    public class TestApocToken : IClassFixture<CheckpointFixture<TestApocToken>>
+    public class ContractDeployedTests : IClassFixture<CheckpointFixture<ContractDeployedTests>>
     {
-        const long TOTAL_SUPPLY = 2_000_000_000_000_000;
+        const string SYMBOL = "APOC";
+        const byte DECIMALS = 8;
+        const long TOTAL_SUPPLY = 1_000_000_00000000;
+
         readonly CheckpointFixture fixture;
         readonly ExpressChain chain;
 
-        public TestApocToken(CheckpointFixture<TestApocToken> fixture)
+        public ContractDeployedTests(CheckpointFixture<ContractDeployedTests> fixture)
         {
             this.fixture = fixture;
             this.chain = fixture.FindChain();
@@ -36,8 +39,8 @@ namespace ApocTokenTests
 
             engine.State.Should().Be(VMState.HALT);
             engine.ResultStack.Should().HaveCount(2);
-            engine.ResultStack.Peek(0).Should().BeEquivalentTo(8);
-            engine.ResultStack.Peek(1).Should().BeEquivalentTo("APOC");
+            engine.ResultStack.Peek(0).Should().BeEquivalentTo(DECIMALS);
+            engine.ResultStack.Peek(1).Should().BeEquivalentTo(SYMBOL);
         }
 
         [Fact]
