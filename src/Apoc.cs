@@ -1,5 +1,4 @@
 using Neo;
-using Neo.SmartContract;
 using Neo.SmartContract.Framework;
 using Neo.SmartContract.Framework.Attributes;
 using Neo.SmartContract.Framework.Native;
@@ -7,6 +6,9 @@ using Neo.SmartContract.Framework.Services;
 using System;
 using System.ComponentModel;
 using System.Numerics;
+
+// explicitly enabling #nullable to eliminate nccs warning
+#nullable enable
 
 namespace DevHawk.Contracts
 {
@@ -31,10 +33,16 @@ namespace DevHawk.Contracts
         const byte Prefix_ContractOwner = 0xFF;
 
         [Safe]
-        public static string Symbol() => SYMBOL;
+        public static string Symbol()
+        {
+            return SYMBOL;
+        }
 
         [Safe]
-        public static byte Decimals() => DECIMALS;
+        public static byte Decimals()
+        {
+            return DECIMALS;
+        }
 
         [Safe]
         public static BigInteger TotalSupply() => (BigInteger)Storage.Get(Storage.CurrentContext, new byte[] { Prefix_TotalSupply });
@@ -122,9 +130,7 @@ namespace DevHawk.Contracts
         }
 
         [DisplayName("_deploy")]
-#pragma warning disable IDE0060
-        public static void Deploy(object data, bool update)
-#pragma warning restore IDE0060
+        public static void Deploy(object _ /*data*/, bool update)
         {
             if (update) return;
 
