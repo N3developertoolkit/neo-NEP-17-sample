@@ -17,6 +17,7 @@ namespace DevHawk.Contracts
     [ManifestExtra("Email", "harrypierson@hotmail.com")]
     [ManifestExtra("Description", "This is a NEP17 example")]
     [SupportedStandards("NEP-17")]
+    [ContractPermission("*", "onNEP17Payment")]
     public class ApocToken : SmartContract
     {
         const string SYMBOL = "APOC";
