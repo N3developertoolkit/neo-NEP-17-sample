@@ -27,7 +27,6 @@
             "presentation": {
                 "reveal": "silent"
             },
-            "dependsOn": "dotnet tool restore",
             "problemMatcher": "$msCompile"
         }
     ]
